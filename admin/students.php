@@ -34,7 +34,7 @@
 			});
 			
 			function submit_form(fid, url){
-			    $.post(url, $('#'+fid).serialize(), function(data){
+			    $.post(url, $('#form').serialize(), function(data){
 			        document.location = "students.php";
 			    });
 			    $('#myModal').modal('hide');

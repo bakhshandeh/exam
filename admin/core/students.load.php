@@ -13,9 +13,12 @@ if(isset($_REQUEST["id"])){
 }
 
 
+$states = array("Active", "Pending", "Suspended");
+
 $rets = $db->dbSelect("students");
 foreach($rets as &$ret){
     $ret["address"] = $row["country"]." ".$row["city"]." ".$row["area"]. " ".$row["address"];
+    $ret["status"] = $states[$ret["status"]];
 }
 $rets = addRowNumbers($rets);
 $rets = arraySelectKeys($rets, array("row", "email", "name", "roll_number", "enrol_number", "phone", "address", "parent_phone", "date", "status", "comments", "id"));
