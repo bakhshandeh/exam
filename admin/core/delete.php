@@ -9,7 +9,7 @@ $table = $_REQUEST["table"];
 $id = (int)$_REQUEST["id"];
 
 
-$tables = array("subjects", "users", "stdgroups", "students");
+$tables = array("subjects", "users", "stdgroups", "students", "questions");
 
 if(!in_array($table, $tables)){
     return;

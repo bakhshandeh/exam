@@ -64,6 +64,18 @@ checkLogin();
                   <li><a href="students.php">Students</a></li>
                 </ul>
               </li>
+              
+              
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Questions<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="questions.php?type=0">Subjective Questions</a></li>
+                  <li><a href="questions.php?type=1">Objective Questions</a></li>
+                  <li><a href="questions.php?type=2">Multiple Choice Questions</a></li>
+                  <li><a href="questions.php?type=3">True/False Questions</a></li>
+                </ul>
+              </li>
+              
             
             <li id="exams_li"><a href="exams.php">Exams</a></li>
           </ul>
