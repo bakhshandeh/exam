@@ -44,7 +44,8 @@ $type = (int)$_REQUEST["type"];
 $id = (int)$_REQUEST["id"];
 
 if($type == 1 or $type==2){
-    $answers = $_REQUEST["answers"];
+    $answers = array($_REQUEST["answer1"],$_REQUEST["answer2"],$_REQUEST["answer3"],$_REQUEST["answer4"]);
+    $true_answer = (int)$_REQUEST["true_answer"];
     $trues = $_REQUEST["trues"];
     
     $db->dbDelete("qanswers", "qid=".$qid);
@@ -53,8 +54,11 @@ if($type == 1 or $type==2){
         $data = array(
             "qid" => $qid,
             "body" => quote($answers[$i]),
-            "is_true" => isset($trues[$i]) ? "1" : "0"
+            "is_true" => $true_answer=($i+1) ? "1" : "0"
         );
+        if($type == 2){
+            $data["is_true"] = isset($trues[$i+1]) ? "1" : "0";
+        }
         if($answers[$i] != ""){
             $db->dbInsert("qanswers", $data);
         }

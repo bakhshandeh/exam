@@ -1,7 +1,27 @@
 
 <script src="js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" charset="utf-8">
-       tinymce.init({selector:'textarea'});
+       //tinymce.init({selector:'textarea'});
+       //<script type="text/javascript">
+    tinymce.init({
+    selector: "textarea",
+    theme: "modern",
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor moxiemanager"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    toolbar2: "print preview media | forecolor backcolor emoticons",
+    image_advtab: true,
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ]
+    });
+//</script>
+
 </script>
 
 <script type="text/javascript" charset="utf-8">
@@ -106,6 +126,7 @@ function showModal($name = "myModal" , $edit = false){
                 <input type="hidden" name="type" value=0>
                 
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Question: </label>
                     <textarea name="body" id=="{$prefix}_body"></textarea>
                 </div>
                 
@@ -117,7 +138,7 @@ function showModal($name = "myModal" , $edit = false){
                 </div>
                 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Hint: </label>
+                    <label for="exampleInputEmail1">Hint / Explanation: </label>
                     <input type="text" class="form-control" id="{$prefix}hint" placeholder="" name="hint">
                 </div>
                 
