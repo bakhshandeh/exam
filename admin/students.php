@@ -78,6 +78,7 @@ function showModal($name = "myModal" , $edit = false){
     $prefix = $edit ? "edit_" : "";
     $title = $edit ? "Edit/View Student" : "Add New Student";
     $onclick = $edit ? "editSubject();": "submit_form('add_subject_form', 'core/student.add.php');";
+    $stdgroupOptions = stdgroupOptions();
     $modal = <<<END
     
     <div class="modal fade" id="{$name}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -91,9 +92,20 @@ function showModal($name = "myModal" , $edit = false){
             
             <form role="form" id="{$prefix}form">
                 <input type="hidden" name="id" id="{$prefix}id">
+                
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email: </label>
-                    <input type="text" class="form-control" id="{$prefix}email" placeholder="Email" name="email">
+                <div class="row">
+                    <div class="col-lg-8">
+                        Email: <input type="text" class="form-control" id="{$prefix}email" placeholder="Email" name="email">
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        Student Group: 
+                        <select class="form-control" name="stdgroup" id="{$prefix}stdgroup">
+                            {$stdgroupOptions}
+                        </select>
+                    </div>
+                </div>
                 </div>
                 
                 <div class="form-group">

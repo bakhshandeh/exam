@@ -29,8 +29,10 @@ checkLogin();
     <script type="text/javascript" language="javascript" src="js/jquery.jeditable.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.editable.js"></script>
     <script type="text/javascript" language="javascript" src="js/lib.js"></script>
+    <script type="text/javascript" language="javascript" src="js/bootstrap-datetimepicker.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

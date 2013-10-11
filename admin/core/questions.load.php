@@ -20,6 +20,11 @@ $cond = "";
 if($_REQUEST["type"]){
     $cond = "type=".(int)$_REQUEST["type"];
 }
+if($_REQUEST["exam"]){
+    $eid = (int) $_REQUEST["exam"];
+    $not = isset($_REQUEST["no_exam"]) ? "not" : "";
+    $cond = "questions.id {$not} in (select qid from exam_qs where eid={$eid})";
+}
 $rets = $db->dbSelect("questions left join subjects on(subject=subjects.id)", $cond, "", 0, -1, array("questions.id as id", "questions.*", "subjects.title") );
 
 $qTypes = QTypes();
