@@ -31,7 +31,22 @@
 <script type="text/javascript" charset="utf-8">
                         var selectedId = 0;
                         
+                        function RefreshTable(table, urlData){
+                              $.getJSON(urlData, null, function( json ){
+                                    oSettings = table.fnSettings();
+                                    table.fnClearTable(this);
+                                    for (var i=0; i<json.aaData.length; i++){
+                                        table.oApi._fnAddData(oSettings, json.aaData[i]);
+                                    }
+                                    oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+                                    table.fnDraw();
+                            });
+                        }
+                        
+                        
 			$(document).ready(function() {
+			
+			        
 			        $('#exams_li').addClass('active');
 			       
 			        $('#start_date').datetimepicker();
@@ -40,7 +55,7 @@
 			        $('#edit_start_date').datetimepicker();
 			        $('#edit_end_date').datetimepicker();
 			        
-			        $('#example').dataTable({
+			        examTable = $('#example').dataTable({
 				    "sAjaxSource": "core/questions.load.php?exam=<?php echo $id;?>",
                                     "bProcessing": true,
                                     "aoColumnDefs": [ 
@@ -48,13 +63,26 @@
                                             "aTargets": [7], 
                                             "sType": "html", 
                                             "fnRender": function(o, val) {
-                                                return "<a href=\"javascript:delFromExam("+ o.aData[7]+", <?php echo $id;?>)\"> Delete </a>";
+                                                return "<a class='delfromexam' q="+o.aData[7]+" exam="+<?php echo $id;?>+"> Delete </a>";
                                             } 
                                         }
-                                    ]
+                                    ],
+                                    "fnInitComplete": function(oSettings, json) {
+                                                $(".delfromexam").bind("click", function(event){
+                                                        var q = $(this).attr('q');
+                                                        var exam = $(this).attr('exam');
+                                                        var target_row = $(this).closest("tr").get(0);
+                                                        var del = 1;
+                                                        $.post("core/add_exam_question.php", {q: q, exam: exam, del: del}, function(data){
+                                                            var aPos = examTable.fnGetPosition(target_row); 
+                                                            examTable.fnDeleteRow(aPos);
+                                                            //RefreshTable(examTable, "core/questions.load.php?exam=<?php echo $id;?>");
+                                                        });
+                                                });
+                                    }
                                 });
                                 
-                                $('#all_qs_table').dataTable({
+                                allTable = $('#all_qs_table').dataTable({
 				    "sAjaxSource": "core/questions.load.php?exam=<?php echo $id;?>&no_exam=1",
                                     "bProcessing": true,
                                     "aoColumnDefs": [ 
@@ -62,13 +90,25 @@
                                             "aTargets": [7], 
                                             "sType": "html", 
                                             "fnRender": function(o, val) {
-                                                return "<a href=\"javascript:addToExam("+ o.aData[7]+", <?php echo $id;?>)\"> Add to Exam </a>";
+                                                //return "<a href=\"javascript:addToExam(this,"+ o.aData[7]+", <?php echo $id;?>)\"> Add to Exam </a>";
+                                                return "<a class='addqtoexam' q="+o.aData[7]+" exam="+<?php echo $id;?>+"> Add to Exam </a>";
                                             }
                                         }
                                     ],
                                     "fnInitComplete": function(oSettings, json) {
                                                 //alert("hi");
                                                 $('#my_tab a:first').tab('show');
+                                                
+                                                $(".addqtoexam").bind("click", function(event){
+                                                        var q = $(this).attr('q');
+                                                        var exam = $(this).attr('exam');
+                                                        var target_row = $(this).closest("tr").get(0);
+                                                        $.post("core/add_exam_question.php", {q: q, exam: exam}, function(data){
+                                                            var aPos = allTable.fnGetPosition(target_row); 
+                                                            allTable.fnDeleteRow(aPos);
+                                                            RefreshTable(examTable, "core/questions.load.php?exam=<?php echo $id;?>");
+                                                        });
+                                                });
                                     }
                                 });
 
@@ -213,12 +253,12 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Exam Name</th>
-			<th>Duration</th>
-			<th>Start/End Dates</th>
-			<th>Pass Percent %</th>
-			<th>Negative Marks</th>
-			<th>Instructions</th>
+			<th>Subject</th>
+			<th>TYpe</th>
+			<th>Body of Question</th>
+			<th>Difficulty Level</th>
+			<th>Marks</th>
+			<th>Hint/Explanation</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -230,13 +270,13 @@
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="all_qs_table">
 	<thead>
 		<tr>
-			<th>#</th>
-			<th>Exam Name</th>
-			<th>Duration</th>
-			<th>Start/End Dates</th>
-			<th>Pass Percent %</th>
-			<th>Negative Marks</th>
-			<th>Instructions</th>
+		        <th>#</th>
+			<th>Subject</th>
+			<th>TYpe</th>
+			<th>Body of Question</th>
+			<th>Difficulty Level</th>
+			<th>Marks</th>
+			<th>Hint/Explanation</th>
 			<th>Actions</th>
 		</tr>
 	</thead>

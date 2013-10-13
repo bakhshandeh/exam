@@ -62,6 +62,7 @@
 
 
 <br />
+
 <a data-toggle="modal" href="#myModal" class="btn btn-success">Add New Subject</a>
 
 

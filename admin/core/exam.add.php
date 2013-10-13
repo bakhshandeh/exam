@@ -45,6 +45,9 @@ if($isEdit){
     $db->dbUpdate("exams", $data, "id=".(int)$_REQUEST["id"]);
 }else{
     $db->dbInsert("exams", $data);
+    $data=$db->dbSelect("exams", "", "", 0, -1, array("max(id) as max"));
+    
+    print $data[0]["max"];
 }
 
 ?>

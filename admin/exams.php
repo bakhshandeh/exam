@@ -68,7 +68,8 @@
 			    url = "core/exam.add.php";
 			    $.post(url, $('#'+id).serialize(), function(data){
 			        //alert("hi");
-			        document.location = "exams.php";
+			        //document.location = "exams.php";
+			        document.location = "exam_details.php?id="+data;
 			    });
 			    $('#myModal').modal('hide');
 			}

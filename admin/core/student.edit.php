@@ -18,7 +18,8 @@ $keys = array(
     "phone",
     "alt_phone",
     "parent_phone",
-    "comments"
+    "comments",
+    "stdgroup"
 );
 
 $data = array();
