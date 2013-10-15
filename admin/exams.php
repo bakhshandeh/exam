@@ -160,7 +160,7 @@ function showModal($name = "myModal" , $edit = false){
                                 <span class="add-on" style="display: inline-block;">
                                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                     </i>
-                                    <img src="http://localhost/examapp/images/cal.png" style="width: 20px;"> </img>
+                                    <img src="/examapp/images/cal.png" style="width: 20px;"> </img>
                                 </span>
                                 </nobr>
                             </div>
@@ -175,7 +175,7 @@ function showModal($name = "myModal" , $edit = false){
                                 <span class="add-on" style="display: inline-block;">
                                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                     </i>
-                                    <img src="http://localhost/examapp/images/cal.png" style="width: 20px;"> </img>
+                                    <img src="/examapp/images/cal.png" style="width: 20px;"> </img>
                                 </span>
                                 </nobr>
                             </div>
