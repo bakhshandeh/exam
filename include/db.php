@@ -1,6 +1,7 @@
 <?php
 
 
+require_once(dirname(__FILE__)."/../config.php");
 /**
  * @package	Aseman
  * @subpackage	Util
@@ -77,8 +78,9 @@ class DB{
     * @return 	void
     */
     private function connect($server,$dbname){
-	$this->link = mysql_connect('localhost','root','reza');
-	$ret = mysql_query("use exam;");
+	$this->link = mysql_connect(DB_HOST,DB_USER,DB_PASS);
+	$dbname = DB_NAME;
+	$ret = mysql_query("use {$dbname};");
 	if(! $this->link)
 	     throw new Exception("DB_CONNECTION_ERROR");
        else
