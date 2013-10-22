@@ -8,7 +8,6 @@ $p = quote($_REQUEST["pass"]);
 
 print "email = {$u} and pass={$p}";
 $ret = $db->dbSelect("students", "email = {$u} and pass={$p}");
-var_dump($ret);
 if(count($ret)){
     $student = $ret[0];
     $_SESSION["loginInfo"] = $student;
