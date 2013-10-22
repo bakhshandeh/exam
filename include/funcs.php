@@ -87,4 +87,10 @@ function arraySelectKeys($arr, $keys){
     }
     return $ret;
 }
+
+function loadStudent($id){
+    $db = DBSingleton::getInstance();
+    $ret = $db->dbSelect("students", "id={$id}");
+    return $ret[0];
+}
 ?>
