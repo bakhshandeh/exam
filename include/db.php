@@ -232,6 +232,9 @@ class DB{
     */
     public function query($q){
 	//print $q."<br>";
+	if(isset($_REQUEST["__DEBUG__"])){
+	    print $q;
+	}
 	if(!$this->isconnect){
 	    throw new Exception('DB_CONNECTION_ERROR');
 	}

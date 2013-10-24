@@ -15,6 +15,7 @@ checkLogin();
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/my.css" rel="stylesheet">
 
     <!-- Add custom CSS here -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
