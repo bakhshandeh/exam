@@ -93,4 +93,18 @@ function loadStudent($id){
     $ret = $db->dbSelect("students", "id={$id}");
     return $ret[0];
 }
+
+function notNull($fields){
+    if(!is_array($fields)){
+        $fields = array($fields);
+    }
+    
+    foreach($fields as $f){
+        $val = trim($_REQUEST[$f]);
+        if(!strlen($val)){
+            print "Empty Field: please insert the '{$f}'";
+            exit(0);
+        }
+    }
+}
 ?>

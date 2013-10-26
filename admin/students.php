@@ -35,9 +35,13 @@
 			
 			function submit_form(fid, url){
 			    $.post(url, $('#form').serialize(), function(data){
-			        document.location = "students.php";
+			        if(data.indexOf("OK!") != -1 || data == ""){
+			            document.location = "students.php";
+			            return;
+			        }
+			        alert(data);
 			    });
-			    $('#myModal').modal('hide');
+			    //$('#myModal').modal('hide');
 			}
 			
 			function editOnClick(id){

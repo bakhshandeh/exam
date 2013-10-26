@@ -23,6 +23,8 @@ $keys = array(
     
 );
 
+notNull(array("name", "email", "pass", "phone", "enrol_number"));
+
 $data = array();
 $data["status"] = (int)$_REQUEST["status"];
 $data["date"] = "now()";
