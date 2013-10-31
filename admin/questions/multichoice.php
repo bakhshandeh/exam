@@ -103,7 +103,7 @@
 			    $('#myModal').modal('hide');
 			}
 			
-			function addNew(prefix, p1="", p2=""){
+			function addNew(prefix){
 			    if(p1 == undefined){
 			        p1 = ""
 			    }
