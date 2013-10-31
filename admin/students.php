@@ -4,6 +4,28 @@
                         var selectedId = 0;
                         
 			$(document).ready(function() {
+			
+			         $('.multiselect').multiselect({
+buttonClass: 'btn',
+buttonWidth: 'auto',
+buttonContainer: '<div class="btn-group" />',
+maxHeight: false,
+buttonText: function(options) {
+if (options.length == 0) {
+return 'None selected <b class="caret"></b>';
+}
+else if (options.length > 3) {
+return options.length + ' selected <b class="caret"></b>';
+}
+else {
+var selected = '';
+options.each(function() {
+selected += $(this).text() + ', ';
+});
+return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+}
+}
+});
 			        //$('#subjects_li').addClass('active');
 				
 				$('#example').dataTable({
@@ -35,6 +57,7 @@
 			
 			function submit_form(fid, url){
 			    $.post(url, $('#form').serialize(), function(data){
+			        alert(data);
 			        if(data.indexOf("OK!") != -1 || data == ""){
 			            document.location = "students.php";
 			            return;
@@ -105,7 +128,7 @@ function showModal($name = "myModal" , $edit = false){
                     
                     <div class="col-lg-4">
                         Student Group: 
-                        <select class="form-control" name="stdgroup" id="{$prefix}stdgroup">
+                        <select name="stdgroup[]" id="{$prefix}stdgroup" class="multiselect" multiple="multiple">
                             {$stdgroupOptions}
                         </select>
                     </div>
@@ -121,13 +144,13 @@ function showModal($name = "myModal" , $edit = false){
                         Password: <input type="text" class="form-control" placeholder="Password" id="{$prefix}pass" name="pass">
                     </div>
                     <div class="col-lg-4">
-                        Mobile: <input type="text" class="form-control" placeholder="Mobile" id="{$prefix}mobile" name="mobile">
+                        <!-- Mobile: <input type="text" class="form-control" placeholder="Mobile" id="{$prefix}mobile" name="mobile"--> 
                     </div>
                 </div>
                 </div>
                 
                 
-                <div class="form-group">
+                <!--div class="form-group">
                 <div class="row">
                     <div class="col-lg-4">
                         Country: <input type="text" class="form-control" placeholder="Country" id="{$prefix}country" name="country">
@@ -139,7 +162,7 @@ function showModal($name = "myModal" , $edit = false){
                         City: <input type="text" class="form-control" placeholder="City" id="{$prefix}city" name="city">
                     </div>
                 </div>
-                </div>
+                </div -->
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Address: </label>

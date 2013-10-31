@@ -34,9 +34,13 @@
 			
 			function submit_form(fid, url){
 			    $.post(url, $('#'+fid).serialize(), function(data){
+			        if(data.indexOf("OK!") == -1){
+			            alert(data);
+			            return;
+			        }
 			        document.location = "subjects.php";
 			    });
-			    $('#myModal').modal('hide');
+			    //$('#myModal').modal('hide');
 			}
 			
 			function editOnClick(id){

@@ -3,6 +3,8 @@
 
 include("header.php");
 $gid = (int)$_SESSION["loginInfo"]["stdgroup"];
+$std_id = (int)$_SESSION["loginInfo"]["id"];
+
 $db = DBSingleton::getInstance();
 
 $eid = (int)$_REQUEST["eid"];
@@ -13,6 +15,18 @@ foreach($rets as &$q){
     $ans = $db->dbSelect("qanswers", "qid=".($q["id"]) );
     $q["answers"] = $ans;
 }
+
+$ans = $db->dbSelect("stdexam_qs", "eid={$eid} and std_id={$std_id}");
+$std_ans = array();
+foreach($ans as $an){
+    $std_ans[$an["qid"]] = $an;
+}
+
+foreach($rets as &$q){
+    $q["is_answered"] = isset($std_ans[$q["id"]]);
+    $q["std_answer"] = $std_ans[$q["id"]];
+}
+
 $QS = $rets;
 ?>
 
@@ -47,7 +61,7 @@ $QS = $rets;
 	    if(QS[indx].type == 2){
 	        html = "";
 	        for(i=0; i < QS[indx].answers.length; i++){
-	            html = html + "<input type='checkbox' name='answer["+i+"]'> "+QS[indx]['answers'][i].body+"<br>";
+	            html = html + "<input type='checkbox' value="+i+" name='answer["+i+"]'> "+QS[indx]['answers'][i].body+"<br>";
 	        }
 	    }
 	    
@@ -71,11 +85,18 @@ $QS = $rets;
         }
         
         window.save = function save(){
-            alert("saved");
+            currentRec = QS[current];
+            qid = currentRec.id;
+            eid = <?php echo $eid;?>;
+            ser = $("#q_form_id").serialize()+ "&eid="+eid+"&qid="+qid;
+            $.post('core/answer.add.php', ser, function(data){
+                //alert(data);
+            });
+
         }
         
         window.save_next = function save_next(){
-            //save();
+            save();
             $("#td_id_"+current).addClass("badge-info");
             next_q();
         }
@@ -136,7 +157,8 @@ $QS = $rets;
                     </div>
                     
                     <div class="col-md-4 well">
-                        <table>
+                        
+                <table>
                 <?php
                     $N = 5;
                     $tr_count = (int)(count($QS)/$N);
@@ -149,8 +171,12 @@ $QS = $rets;
                             foreach(array(1,2,3,4,5) as $j){
                                 $num = $i*$N + $j;
                                 $goto = $num - 1;
+                                $state = "";
+                                if($QS[$goto]["is_answered"]){
+                                    $state = " badge-info";
+                                }
                                 print <<<END
-                                <td class="badge" style="width:40px;height:30px;line-height:20px;" onclick="goto({$goto})" id="td_id_{$goto}"> 
+                                <td class="badge{$state}" style="width:40px;height:30px;line-height:20px;" onclick="goto({$goto})" id="td_id_{$goto}"> 
                                      {$num}
                                 </td>
 END;
@@ -158,7 +184,7 @@ END;
                             print "</tr>";
                     }
                 ?>
-                        </table>
+                </table>
                         
                         <br><br>
                         

@@ -107,4 +107,23 @@ function notNull($fields){
         }
     }
 }
+
+function checkDuplicates($fs){
+    $db = DBSingleton::getInstance();
+    foreach($fs as $k => $v){
+        list($tableName, $col) = explode(".", $k);
+        $ret = $db->dbSelect($tableName, "{$col}=".quote($_REQUEST[$col]));
+        if(count($ret)){
+            print $v;exit(0);
+        }
+    }
+}
+
+function checkDuplicate($tableName, $cond, $msg){
+    $db = DBSingleton::getInstance();
+    $ret = $db->dbSelect($tableName, $cond);
+    if(count($ret)){
+        print $msg;exit(0);
+    }
+}
 ?>

@@ -18,9 +18,12 @@ checkLogin();
     <link href="css/bootstrap.css" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="dataTables.bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
     
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
     
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>

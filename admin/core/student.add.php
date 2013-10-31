@@ -23,6 +23,9 @@ $keys = array(
     
 );
 
+var_dump($_REQUEST);
+
+checkDuplicate("students", "email=".quote($_REQUEST["email"]), "Duplicate email!");
 notNull(array("name", "email", "pass", "phone", "enrol_number"));
 
 $data = array();

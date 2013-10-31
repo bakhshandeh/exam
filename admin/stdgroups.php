@@ -34,9 +34,13 @@
 			
 			function submit_form(fid, url){
 			    $.post(url, $('#'+fid).serialize(), function(data){
-			        document.location = "stdgroups.php";
+			        if(data == "" || data.indexOf("OK!") != -1){
+			            document.location = "stdgroups.php";
+			        }else{
+			            alert(data);
+			        }
 			    });
-			    $('#myModal').modal('hide');
+			    //$('#myModal').modal('hide');
 			}
 			
 			function editOnClick(id){
