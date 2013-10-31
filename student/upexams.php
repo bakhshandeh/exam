@@ -2,9 +2,10 @@
 <?php 
 
 include("header.php");
-$gid = (int)$_SESSION["loginInfo"]["stdgroup"];
+//$gid = (int)$_SESSION["loginInfo"]["stdgroup"];
+$std_id = $_SESSION["loginInfo"]["id"];
 $db = DBSingleton::getInstance();
-$exams = $db->dbSelect("exams",  "end_date >= now() and id in (select eid from exam_stdgroups where gid={$gid})");
+$exams = $db->dbSelect("exams",  "end_date >= now() and id in (select eid from exam_stdgroups where gid in(select g_id from std_stdgs where std_id = {$std_id}))");
 ?>
 
     
