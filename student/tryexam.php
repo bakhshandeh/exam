@@ -38,7 +38,7 @@ $QS = $rets;
 	current = 0;
 	
 	window.load = function load(id){
-	    exam = <?echo $eid;?>;
+	    exam = <?php echo $eid;?>;
 	    $.post("core/questions.load.php", {exam: exam}, function(data){
 		var json = $.parseJSON(data);
 		QS = json;
