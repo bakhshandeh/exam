@@ -104,6 +104,12 @@
 			}
 			
 			function addNew(prefix, p1="", p2=""){
+			    if(p1 == undefined){
+			        p1 = ""
+			    }
+			    if(p2 == undefined){
+			        p2 = ""
+			    }
 			    num = 0;
 			    all = 0;
                             $("[id='"+prefix+"answers']").each( function(index, el) {
