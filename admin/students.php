@@ -57,7 +57,7 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
 			
 			function submit_form(fid, url){
 			    $.post(url, $('#form').serialize(), function(data){
-			        alert(data);
+			        //alert(data);
 			        if(data.indexOf("OK!") != -1 || data == ""){
 			            document.location = "students.php";
 			            return;
@@ -72,10 +72,29 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
 			    
 			    //Load Data
 			    $.post("core/students.load.php", {id: selectedId}, function(data){
+			        //alert(data);
 			        var json = $.parseJSON(data);
 			        $.each(json, function(k,v){
-			            $('#edit_'+k).val(v);
+			            val = $('#edit_'+k).val(v);
+			            
 			        });
+			        
+			        el = $('#edit_stdgroup');
+			        $('option', el).each(function(idx, element){
+			            val = $(element).val();
+			            select = -1;
+			            for(i=0; i < json.gs.length; i++){
+			                if(json.gs[i].g_id == val){
+			                    select = val;
+			                }
+			            }
+			            if(select != -1){
+			                $(el).multiselect("select", select);
+			            }else{
+			                $(el).multiselect("deselect", val);
+			            }
+			        });
+			        $(el).multiselect('refresh');
 			        $("#edit_modal").modal();
 			    });
 			    

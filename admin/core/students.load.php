@@ -8,7 +8,14 @@ $db = DBSingleton::getInstance();
 
 if(isset($_REQUEST["id"])){
     $rets = $db->dbSelect("students", "id=".(int)$_REQUEST["id"]);
-    print json_encode($rets[0]);
+    
+    
+    $groups = $db->dbSelect("std_stdgs", "std_id=".(int)$_REQUEST["id"]);
+    $s = $rets[0];
+    $s["gs"] = $groups;
+    
+    print json_encode($s);
+    
     return;
 }
 

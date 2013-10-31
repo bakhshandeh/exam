@@ -26,6 +26,8 @@ create table stdgroups(
     id                  int auto_increment primary key,
     title               text
 );
+
+
 #--- 0:subjective 1: Objective 2: Multiple choice 3: true false ---
 create table questions(
     id                  int auto_increment primary key,
