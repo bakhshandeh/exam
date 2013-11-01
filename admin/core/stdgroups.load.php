@@ -12,4 +12,5 @@ $rets = arraySelectKeys($rets, array("row", "title", "id"));
 
 header('Content-Type: application/json');
 $ret = arrayPHPToJS($rets);
+
 echo '{"sEcho":"2","iTotalRecords":'.count($rets).',"iTotalDisplayRecords":'.count($rets).',"aaData":  '.$ret.'}';

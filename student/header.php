@@ -16,6 +16,8 @@ checkLogin();
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/my.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/jquery.countdown.css">
 
     <!-- Add custom CSS here -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -23,6 +25,7 @@ checkLogin();
     
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.countdown.js"></script>
 
   </head>
 

@@ -84,6 +84,7 @@
 			
 			function editSubjectiveQ(){
 			    //alert("gu");
+			    tinymce.triggerSave();
 			    $.post("core/question.add.php", $('#edit_subform').serialize(), function(data){
 			        //alert(1);
 			        document.location = "questions.php";

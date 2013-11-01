@@ -28,7 +28,7 @@ foreach($rets as &$ret){
     $ret["status"] = $states[$ret["status"]];
 }
 $rets = addRowNumbers($rets);
-$rets = arraySelectKeys($rets, array("row", "email", "name", "roll_number", "enrol_number", "phone", "address", "parent_phone", "date", "status", "comments", "id"));
+$rets = arraySelectKeys($rets, array("row", "email", "name", "enrol_number", "phone", "address", "parent_phone", "date", "status", "comments", "id"));
 
 header('Content-Type: application/json');
 $ret = arrayPHPToJS($rets);

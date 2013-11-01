@@ -33,12 +33,12 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
                                     "bProcessing": true,
                                     "aoColumnDefs": [ 
                                         {
-                                            "aTargets": [11], 
+                                            "aTargets": [10], 
                                             "sType": "html", 
                                             "fnRender": function(o, val) {
                                                 //alert(o);
-                                                return "<a href=\"javascript:delRecord('students', "+ o.aData[11]+", 'students.php')\"> Delete </a> \
-                                                | <a href='javascript:editOnClick("+o.aData[11]+");'> Edit/View </a>";
+                                                return "<a href=\"javascript:delRecord('students', "+ o.aData[10]+", 'students.php')\"> Delete </a> \
+                                                | <a href='javascript:editOnClick("+o.aData[10]+");'> Edit/View </a>";
                                             } 
                                         }
                                     ]
@@ -102,7 +102,11 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
 			
 			function editSubject(){
 			    $.post("core/student.edit.php", $('#edit_form').serialize(), function(data){
-			        document.location = "students.php";
+			        if(data.indexOf("OK!") != -1 || data == ""){
+			            document.location = "students.php";
+			            return;
+			        }
+			        alert(data);
 			    });
 			    $('#myModal').modal('hide');
 			}
@@ -206,9 +210,6 @@ function showModal($name = "myModal" , $edit = false){
                 <div class="form-group">
                 <div class="row">
                     <div class="col-lg-4">
-                        Roll Number: <input type="text" class="form-control" placeholder="Roll Number" id="{$prefix}roll_number" name="roll_number">
-                    </div>
-                    <div class="col-lg-4">
                         Enrolment Number : <input type="text" class="form-control" placeholder="" id="{$prefix}enrol_number" name="enrol_number">
                     </div>
                     <div class="col-lg-4">
@@ -261,7 +262,6 @@ showModal("edit_modal", true);
 			<th>#</th>
 			<th>Email</th>
 			<th>Name</th>
-			<th>Roll Number</th>
 			<th>Enrolment Number</th>
 			<th>Phone</th>
 			<th>Address</th>

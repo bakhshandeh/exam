@@ -13,7 +13,6 @@ $keys = array(
     "country",
     "address",
     "mobile",
-    "roll_number",
     "enrol_number",
     "phone",
     "alt_phone",
@@ -23,10 +22,36 @@ $keys = array(
     
 );
 
+// Author: Zinat
+
+if(!filter_var($_REQUEST["email"], FILTER_VALIDATE_EMAIL)){
+    print "Please insert a valid email! ";
+    exit(0);
+}
+
+if(count($_REQUEST["stdgroup"])==0){
+    print "Please select at list one group";
+    exit(0);
+}
+
+if(strlen($_REQUEST["phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["phone"]) ){
+    print "Invalid phone. phone should be 10 digit number";
+    exit(0);
+}
+
+if( !ereg('^[0-9]+$',$_REQUEST["enrol_number"]) ){
+    print "Invalid enrol_number";
+    exit(0);
+}
+
+//----- END -------
+
+
 $stdgroups = $_REQUEST["stdgroup"];
 if(!is_array($stdgroups)){
     $stdgroups = array();
 }
+
 
 checkDuplicate("students", "email=".quote($_REQUEST["email"]), "Duplicate email!");
 notNull(array("name", "email", "pass", "phone", "enrol_number"));
@@ -50,4 +75,6 @@ foreach($stdgroups as $g){
         "g_id" => (int)$g
     ));
 }
+
+
 ?>

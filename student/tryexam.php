@@ -1,4 +1,3 @@
-
 <?php 
 
 include("header.php");
@@ -28,6 +27,9 @@ foreach($rets as &$q){
 }
 
 $QS = $rets;
+
+$ret = $db->dbSelect("exams", "id={$eid}");
+$EXAM = $ret[0];
 ?>
 
     
@@ -36,6 +38,19 @@ $QS = $rets;
     $(document).ready(function() {
 	QS = 0;
 	current = 0;
+	
+	startDate = "<?php echo $EXAM['start_date']?>";
+	startDate = startDate.replace(/:| /g,"-");
+	var YMDhms = startDate.split("-");
+        var sqlDate = new Date();
+        
+        duration = "<?php echo $EXAM['duration']?>";
+        dus = duration.split(':');
+        sqlDate.setFullYear(parseInt(YMDhms[0]), parseInt(YMDhms[1])-1,
+                                                 parseInt(YMDhms[2]));
+        sqlDate.setHours(parseInt(YMDhms[3])+parseInt(dus[0]), parseInt(YMDhms[4])+parseInt(dus[1]), 
+                                              parseInt(YMDhms[5])+parseInt(dus[2]), 0/*msValue*/);
+        $('#defaultCountdown').countdown({until: sqlDate, format: 'HMS'});
 	
 	window.load = function load(id){
 	    exam = <?php echo $eid;?>;
@@ -153,11 +168,20 @@ $QS = $rets;
                         </ul -->
                     </div>
                     
+                    <div class="col-md-5">
+                    
+                    <div class="row">
                     <div class="col-md-1">
                     </div>
+                    <div class="col-md-10 well">
+                        <div id="defaultCountdown"></div>
+                    </div>
+                    </div>
                     
-                    <div class="col-md-4 well">
-                        
+                    <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-10 well">
                 <table>
                 <?php
                     $N = 5;
@@ -170,6 +194,9 @@ $QS = $rets;
                             print '<tr style="border: 3px solid white;">';
                             foreach(array(1,2,3,4,5) as $j){
                                 $num = $i*$N + $j;
+                                if($num > count($QS)){
+                                    break;
+                                }
                                 $goto = $num - 1;
                                 $state = "";
                                 if($QS[$goto]["is_answered"]){
@@ -217,7 +244,8 @@ END;
                             </tr>
                         </table>
                     </div>
-                    
+                    </div>
+                </div>
                     
                     
                     
