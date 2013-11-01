@@ -223,7 +223,7 @@ $EXAM = $ret[0];
                     </div>
                     <div class="col-md-10 well">
                     You are viewing <b> <?php echo $subject_title; ?> </b> section. <br>
-                    Question Pallette: <br>
+                    Question Palette: <br><br>
                 <table>
                 <?php
                     $N = 5;
@@ -256,7 +256,7 @@ END;
                 </table>
                         
                         <br><br>
-                        
+                        <b>Legend: </b><br><br>
                         <table>
                             <tr>
                                 <td class="badge" style="width:40px;height:30px;line-height:20px;"> 
