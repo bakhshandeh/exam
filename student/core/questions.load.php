@@ -8,6 +8,15 @@ if($_REQUEST["exam"]){
     $eid = (int) $_REQUEST["exam"];
     $cond = "questions.id in (select qid from exam_qs where eid={$eid})";
 }
+
+if($_REQUEST["sub_id"]){
+    $sub_id = (int) $_REQUEST["sub_id"];
+    if($cond != ""){
+        $cond .= " and ";
+    }
+    $cond .= " subjects.id={$sub_id}";
+}
+
 $rets = $db->dbSelect("questions left join subjects on(subject=subjects.id)", $cond, "", 0, -1, array("questions.id as id", "questions.*", "subjects.title") );
 foreach($rets as &$q){
     $ans = $db->dbSelect("qanswers", "qid=".($q["id"]) );

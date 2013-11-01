@@ -8,8 +8,26 @@ $db = DBSingleton::getInstance();
 
 $eid = (int)$_REQUEST["eid"];
 
+$sub_id = "";
+if(isset($_REQUEST["sub_id"])){
+    $sub_id = (int)$_REQUEST["sub_id"];
+}
+
 $cond = "questions.id in (select qid from exam_qs where eid={$eid})";
+$subjects = $db->dbSelect("questions left join subjects on(subject=subjects.id)", $cond, "subjects.id", 0, -1, array("distinct subjects.id as id, subjects.title as title") );
+if($sub_id == ""){
+    $sub_id = (int)$subjects[0]["id"];
+}
+$subject_title = "";
+foreach($subjects as $sbj){
+    if($sbj["id"] == $sub_id){
+        $subject_title = $sbj["title"];
+    }
+}
+
+$cond = "questions.id in (select qid from exam_qs where eid={$eid}) and subjects.id={$sub_id}";
 $rets = $db->dbSelect("questions left join subjects on(subject=subjects.id)", $cond, "", 0, -1, array("questions.id as id", "questions.*", "subjects.title") );
+
 foreach($rets as &$q){
     $ans = $db->dbSelect("qanswers", "qid=".($q["id"]) );
     $q["answers"] = $ans;
@@ -54,7 +72,8 @@ $EXAM = $ret[0];
 	
 	window.load = function load(id){
 	    exam = <?php echo $eid;?>;
-	    $.post("core/questions.load.php", {exam: exam}, function(data){
+	    sub_id = <?php echo $sub_id;?>;
+	    $.post("core/questions.load.php", {exam: exam, sub_id: sub_id}, function(data){
 		var json = $.parseJSON(data);
 		QS = json;
 		select(0);
@@ -143,6 +162,27 @@ $EXAM = $ret[0];
             <div class="row">
                     
                     <div class="col-md-6 well" >
+                    
+                    
+                    
+                        <ul class="nav nav-pills">
+                            <?php
+                                foreach($subjects as $sbj){
+                                    $id = $sbj["id"];
+                                    $title = $sbj["title"];
+                                    $class = $id == $sub_id ? "active" : "";
+                                    print "
+                                    <li class='{$class}'>
+                                        <a href='tryexam.php?eid={$eid}&sub_id={$id}'>{$title}</a>
+                                    </li>";
+                                }
+                            ?>
+                        </ul> 
+    
+                        <br>
+                    
+                    
+                    
                         <p class="" id="q_body_id">
                             This is exam text
                         </p>
@@ -182,6 +222,8 @@ $EXAM = $ret[0];
                     <div class="col-md-1">
                     </div>
                     <div class="col-md-10 well">
+                    You are viewing <b> <?php echo $subject_title; ?> </b> section. <br>
+                    Question Pallette: <br>
                 <table>
                 <?php
                     $N = 5;
