@@ -37,8 +37,14 @@ $exams = $db->dbSelect("exams",  "end_date >= now() and id in (select eid from e
                 <div class="row">
                     <div class="col-md-6">
                     <p class="well">
-                        {$ex["name"]} | {$ex["start_date"]} - {$ex["end_date"]}<br />
-                        <a class="btn btn-primary" type="button" href="tryexam.php?eid={$ex['id']}">Try this exam ...</a>
+                        Name: <span style="font-weight:bold;">{$ex["name"]}</span> <br />
+                        Start Date: <span style="font-weight:bold;">{$ex["start_date"] }</span> <br />
+                        End Date: <span style="font-weight:bold;">{$ex["end_date"]}</span> <br />
+                        Duration: <span style="font-weight:bold;">{$ex["duration"]}</span> <br />
+                        Pass Percent %: <span style="font-weight:bold;">{$ex["pass_p"]}</span><br />
+                        Negative Marks: <span style="font-weight:bold;">{$ex["neg_mark"]}</span>
+                        <br />
+                        <a class="btn btn-primary" type="button" href="tryexam.php?eid={$ex['id']}">Attempt Now</a>
                     </p>
                     </div>
                     

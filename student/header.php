@@ -43,5 +43,6 @@ checkLogin();
           <li><a href="upexams.php">Upcoming Exams</a></li>
           <li><a href="#">Exam History</a></li>
           <li><a href="#">Group Report</a></li>
+           <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>

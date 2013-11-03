@@ -26,7 +26,7 @@ foreach($rets as &$ret){
 }
 
 $rets = addRowNumbers($rets);
-$rets = arraySelectKeys($rets, array("row", "name", "duration", "start_end_dates", "pass_p", "neg_mark","insts", "id"));
+$rets = arraySelectKeys($rets, array("row", "name", "duration", "start_end_dates", "pass_p", "neg_mark","no_attempt", "insts", "id"));
 
 header('Content-Type: application/json');
 $ret = arrayPHPToJS($rets);

@@ -40,12 +40,12 @@
                                     "bProcessing": true,
                                     "aoColumnDefs": [ 
                                         {
-                                            "aTargets": [7], 
+                                            "aTargets": [8], 
                                             "sType": "html", 
                                             "fnRender": function(o, val) {
-                                                return "<a href=\"javascript:delRecord('exams', "+ o.aData[7]+", 'exams.php')\"> Delete </a> \
-                                                | <a href='javascript:editOnClick("+o.aData[7]+");'> Edit/View </a> \
-                                                | <a href='exam_details.php?id="+o.aData[7]+"'> Details </a> \
+                                                return "<a href=\"javascript:delRecord('exams', "+ o.aData[8]+", 'exams.php')\"> Delete </a> \
+                                                | <a href='javascript:editOnClick("+o.aData[8]+");'> Edit/View </a> \
+                                                | <a href='exam_details.php?id="+o.aData[8]+"'> Details </a> \
                                                 ";
                                             } 
                                         }
@@ -109,7 +109,7 @@
 
 
 <br />
-<a data-toggle="modal" href="#myModal" class="btn btn-success">Add New Subjective Question</a>
+<a data-toggle="modal" href="#myModal" class="btn btn-success">Add New Exam</a>
 
 <?php
 
@@ -197,6 +197,15 @@ function showModal($name = "myModal" , $edit = false){
                 </div>
                 </div>
                 
+                <!-- Author zinat -->
+                <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-6">
+                        No. of Attempts: <input type="text" class="form-control" placeholder="" id="{$prefix}no_attempt" name="no_attempt">
+                    </div>
+                </div>
+                </div>
+                <!-- END -->
                 
                 
                 <div class="form-group">
@@ -253,6 +262,7 @@ showModal("edit_modal", true);
 			<th>Start/End Dates</th>
 			<th>Pass Percent %</th>
 			<th>Negative Marks</th>
+			<th>No. of attempt</th>
 			<th>Instructions</th>
 			<th>Actions</th>
 		</tr>

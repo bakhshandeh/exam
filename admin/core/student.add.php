@@ -39,10 +39,23 @@ if(strlen($_REQUEST["phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["phone"]) ){
     exit(0);
 }
 
+
+if(strlen($_REQUEST["alt_phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["alt_phone"]) ){
+    print "Invalid alternate phone. Alternate phone should be 10 digit number";
+    exit(0);
+}
+
+
+if(strlen($_REQUEST["parent_phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["parent_phone"]) ){
+    print "Invalid guardian phone. Guardian phone should be 10 digit number";
+    exit(0);
+}
+
 if( !ereg('^[0-9]+$',$_REQUEST["enrol_number"]) ){
     print "Invalid enrol_number";
     exit(0);
 }
+
 
 //----- END -------
 

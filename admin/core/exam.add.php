@@ -11,6 +11,7 @@ $keys = array(
     "end_date" => "date",
     "neg_mark" => "float",
     "pass_p" => "float",
+    "no_attempt"=>"int",
     "insts" => "",
     "declare_results" => "checkbox",
     "details" => "checkbox"

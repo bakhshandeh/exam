@@ -83,6 +83,7 @@ checkLogin();
               
             
             <li id="exams_li"><a href="exams.php">Exams</a></li>
+            <li ><a href="logout.php">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
