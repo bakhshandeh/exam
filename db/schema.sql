@@ -48,6 +48,7 @@ create table qanswers(
     body        text,
     is_true     int default 0
 );
+
 create table exams(
     id                  int auto_increment primary key,
     name                text,
@@ -59,7 +60,9 @@ create table exams(
     insts               text,
     neg_mark            float,
     pass_p              float
-);create table exam_stdgroups(
+);
+
+create table exam_stdgroups(
     id                  int auto_increment primary key,
     eid                int references exams,
     gid                 int references stdgroups
@@ -69,4 +72,18 @@ create table exam_qs(
     id          int auto_increment primary key,
     qid         int references questions,
     eid         int references exams
+);
+
+create table std_stdgs(
+    id                  int auto_increment primary key,
+    std_id              int references students,
+    g_id                int references stdgroups
+);
+
+create table stdexam_qs(
+    id          int auto_increment primary key,
+    qid         int references questions,
+    eid         int references exams,
+    std_id      int references students,
+    answer      text
 );

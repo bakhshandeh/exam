@@ -39,10 +39,10 @@ checkLogin();
           <li class="sidebar-brand"><a href="#">Exam Application </a></li>
           <li><a href="home.php">Dashboard</a></li>
           <li><a href="profile.php">Profile</a></li>
-          <li><a href="#">News & Announcements</a></li>
+          <!--li><a href="#">News & Announcements</a></li-->
           <li><a href="upexams.php">Upcoming Exams</a></li>
-          <li><a href="#">Exam History</a></li>
-          <li><a href="#">Group Report</a></li>
+          <li><a href="examhistory.php">Exam History</a></li>
+          <!--li><a href="#">Group Report</a></li-->
            <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
