@@ -56,10 +56,14 @@
 			    tinymce.triggerSave();
 			    url = "core/question.add.php";
 			    $.post(url, $('#'+id).serialize(), function(data){
-			        //alert("hi");
-			        document.location = "questions.php?type=2";
+			        if(data.indexOf("OK!") != -1 || data == ""){
+			            document.location = "questions.php?type=2";
+			            return;
+			    }
+			    alert(data);
+			            
 			    });
-			    $('#myModal').modal('hide');
+			    //$('#myModal').modal('hide');
 			}
 			
 			function editOnClick(id){

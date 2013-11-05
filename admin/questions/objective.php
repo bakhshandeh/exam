@@ -57,9 +57,13 @@
 			    url = "core/question.add.php";
 			    $.post(url, $('#'+id).serialize(), function(data){
 			        ////alert(data);
-			        document.location = "questions.php?type=1";
+			        if(data.indexOf("OK!") != -1 || data == ""){
+			            document.location = "questions.php?type=1";
+			            return;
+			        }
+			        alert(data);
 			    });
-			    $('#myModal').modal('hide');
+			    //$('#myModal').modal('hide');
 			}
 			
 			function editOnClick(id){
@@ -155,7 +159,7 @@ function answerTab($i, $prefix){
                     <textarea name="answer{$i}" id="{$prefix}answer{$i}"></textarea>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="true_answer" id="{$prefix}correct{$i}" value="{$i}">
+                            <input type="radio" name="answer" id="{$prefix}correct{$i}" value="{$i}">
                             
                             Correct answer
                         </label>

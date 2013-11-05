@@ -59,7 +59,8 @@ create table exams(
     details             integer default 0,
     insts               text,
     neg_mark            float,
-    pass_p              float
+    pass_p              float,
+    no_attempt          int
 );
 
 create table exam_stdgroups(
