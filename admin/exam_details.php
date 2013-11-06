@@ -40,6 +40,17 @@
                                     }
                                     oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
                                     table.fnDraw();
+                                    
+                                    $(".delfromexam").bind("click", function(event){
+                                                        var q = $(this).attr('q');
+                                                        var exam = $(this).attr('exam');
+                                                        var target_row = $(this).closest("tr").get(0);
+                                                        var del = 1;
+                                                        $.post("core/add_exam_question.php", {q: q, exam: exam, del: del}, function(data){
+                                                            var aPos = examTable.fnGetPosition(target_row); 
+                                                            examTable.fnDeleteRow(aPos);
+                                                        });
+                                    });
                             });
                         }
                         

@@ -1,7 +1,9 @@
 <?php
 
 require_once(dirname(__FILE__)."/../include.php");
+
 $db = DBSingleton::getInstance();
+
 $spId = (int)$_SESSION["loginInfo"]["id"];
 
 $keys = array(
@@ -16,6 +18,59 @@ $keys = array(
     "declare_results" => "checkbox",
     "details" => "checkbox"
 );
+
+// Author:Zinat
+
+if(!strlen($_REQUEST['name'])){
+    print "Invaild Name!";
+    exit(0);
+
+}
+
+$bits = explode(':', $_REQUEST["duration"]);
+if(count($bits) != 2 || $bits[1] > 60) {
+    print "Invaild duration";
+    exit(0);
+}
+
+$start_date=strtotime($_REQUEST["start_date"]);
+if($start_date === false){
+   print "Invaild Start Date!";
+   exit(0);
+}
+
+
+$end_date=strtotime($_REQUEST["end_date"]);
+if($end_date === false){
+   print "Invaild End Date!";
+   exit(0);
+}
+if ( !is_numeric($_REQUEST["pass_p"]) || $_REQUEST["pass_p"]<1|| $_REQUEST["pass_p"]>100){
+    print "Invalid Pass Percent!";
+    exit(0);
+}
+
+if ( !is_numeric($_REQUEST["neg_mark"]) ){
+    print "Invalid Negative Marks!";
+    exit(0);
+}
+
+if ( !is_numeric($_REQUEST["no_attempt"]) ){
+    print "Invalid No. of Attempts!";
+    exit(0);
+}
+
+if(!strlen($_REQUEST['insts'])){
+    print "Invaild Instructions!";
+    exit(0);
+
+}
+
+
+//--END--
+
+
+
 
 $data = array();
 foreach($keys as $k => $v){

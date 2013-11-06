@@ -67,11 +67,16 @@
 			    tinymce.triggerSave();
 			    url = "core/exam.add.php";
 			    $.post(url, $('#'+id).serialize(), function(data){
+			        if($.isNumeric(data)){
+			            document.location = "exam_details.php?id="+data;
+			            return;
+			        }
+			        alert(data);
 			        //alert("hi");
 			        //document.location = "exams.php";
-			        document.location = "exam_details.php?id="+data;
+			        
 			    });
-			    $('#myModal').modal('hide');
+			    //$('#myModal').modal('hide');
 			}
 			
 			function editOnClick(id){
