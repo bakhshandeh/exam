@@ -76,7 +76,7 @@ checkLogin();
                 <ul class="dropdown-menu">
                   <li><a href="questions.php?type=0">Subjective Questions</a></li>
                   <li><a href="questions.php?type=1">Objective Questions</a></li>
-                  <li><a href="questions.php?type=2">Multiple Choice Questions</a></li>
+                  <!--li><a href="questions.php?type=2">Multiple Choice Questions</a></li -->
                   <li><a href="questions.php?type=3">True/False Questions</a></li>
                 </ul>
               </li>

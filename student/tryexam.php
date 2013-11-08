@@ -1,12 +1,38 @@
 <?php 
 
-include("header.php");
-$gid = (int)$_SESSION["loginInfo"]["stdgroup"];
-$std_id = (int)$_SESSION["loginInfo"]["id"];
 
+include("header.php");
+$std_id = (int)$_SESSION["loginInfo"]["id"];
+$eid = (int)$_REQUEST["eid"];
 $db = DBSingleton::getInstance();
 
-$eid = (int)$_REQUEST["eid"];
+update_exams();
+
+$re=(int)get_current_attempt($eid, $std_id);
+$res=$db->dbSelect("exam_attempts", "eid={$eid} and std_id={$std_id} and attempt_num={$re}");
+$att_id=$res[0]["id"];
+$exam=$db->dbSelect("exams", "id={$eid}");
+
+if(count($res)==0 && $re > 0){
+
+    $duration=explode(":",$exam[0]["duration"]);
+    $date = new DateTime();
+    $date->modify("+{$duration[0]} hours");
+    $date->modify("+{$duration[1]} minutes");
+    
+    $db->dbInsert("exam_attempts", array(
+            "eid" => $eid,
+            "std_id" => $std_id,
+            "start_date"=>"now()",
+            "end_date"=>quote($date->format('Y-m-d H:i:s')),
+            "attempt_num" => (int) $re
+    ));
+    
+    $res=$db->dbSelect("exam_attempts", "eid={$eid} and std_id={$std_id} and attempt_num={$re}");
+    $att_id=$res[0]["id"];
+}
+
+$gid = (int)$_SESSION["loginInfo"]["stdgroup"];
 
 $sub_id = "";
 if(isset($_REQUEST["sub_id"])){
@@ -33,7 +59,7 @@ foreach($rets as &$q){
     $q["answers"] = $ans;
 }
 
-$ans = $db->dbSelect("stdexam_qs", "eid={$eid} and std_id={$std_id}");
+$ans = $db->dbSelect("attempt_qs join exam_attempts on(exam_attempts.id = attempt_id)", "eid={$eid} and std_id={$std_id} and attempt_id={$att_id}");
 $std_ans = array();
 foreach($ans as $an){
     $std_ans[$an["qid"]] = $an;
@@ -48,6 +74,12 @@ $QS = $rets;
 
 $ret = $db->dbSelect("exams", "id={$eid}");
 $EXAM = $ret[0];
+
+$ret=$db->dbSelect("exam_attempts", "eid={$eid} and std_id={$std_id} and attempt_num={$re}");
+$start_date=$ret[0]["start_date"];
+
+//$EXAM['start_date']
+
 ?>
 
     
@@ -57,7 +89,7 @@ $EXAM = $ret[0];
 	QS = 0;
 	current = 0;
 	
-	startDate = "<?php echo $EXAM['start_date']?>";
+	startDate = "<?php echo $start_date ?>";
 	startDate = startDate.replace(/:| /g,"-");
 	var YMDhms = startDate.split("-");
         var sqlDate = new Date();
@@ -73,7 +105,8 @@ $EXAM = $ret[0];
 	window.load = function load(id){
 	    exam = <?php echo $eid;?>;
 	    sub_id = <?php echo $sub_id;?>;
-	    $.post("core/questions.load.php", {exam: exam, sub_id: sub_id}, function(data){
+	    att_id=<?php echo $att_id; ?>;
+	    $.post('core/questions.load.php', {exam: exam, sub_id: sub_id, att_id: att_id}, function(data){
 		var json = $.parseJSON(data);
 		QS = json;
 		select(0);
@@ -82,13 +115,24 @@ $EXAM = $ret[0];
 	};
 	
 	window.select = function select(indx){
+	    if(indx>=QS.length){
+	        return;
+	    }
 	    if(QS[indx].type == 0){
-	        html = "<textarea cols=50 rows=3 name='answer'></textarea>";
+	        s = QS[indx].std_answer.answer;
+	        if(s==-1){
+	            s="";
+	        }
+	        html = "<textarea cols=50 rows=3 name='answer'>"+s+"</textarea>";
 	    }
 	    if(QS[indx].type == 1){
 	        html = "";
 	        for(i=0; i < QS[indx].answers.length; i++){
-	            html = html + "<input type='radio' name='answer' value="+i+"> "+QS[indx]['answers'][i].body+"<br>";
+	            s = "";
+	            if(QS[indx].std_answer.answer == i){
+	                s = "checked";
+	            }
+	            html = html + "<input type='radio' name='answer' "+s+" value="+i+"> "+QS[indx]['answers'][i].body+"<br>";
 	        }
 	    }
 	    
@@ -100,7 +144,15 @@ $EXAM = $ret[0];
 	    }
 	    
 	    if(QS[indx].type == 3){
-	        html = "<input type='radio' name='answer' value=1> True <br>" + "<input type='radio' name='answer' value=0> False";
+	        true_s = "";
+	        false_s = "";
+	        if(QS[indx].std_answer.answer == 0){
+	            false_s = "checked";
+	        }
+	        if(QS[indx].std_answer.answer == 1){
+	            true_s = "checked";
+	        }
+	        html = "<input type='radio' name='answer' value=1 "+true_s+"> True <br>" + "<input type='radio' name='answer' value=0 "+false_s+"> False";
 	    }
 	    
 	    $('#q_form_id').html(html);
@@ -122,17 +174,25 @@ $EXAM = $ret[0];
             currentRec = QS[current];
             qid = currentRec.id;
             eid = <?php echo $eid;?>;
-            ser = $("#q_form_id").serialize()+ "&eid="+eid+"&qid="+qid;
+            att_id=<?php echo $att_id; ?>;
+            ser = $("#q_form_id").serialize()+ "&eid="+eid+"&qid="+qid+"&att_id="+att_id;
+            
             $.post('core/answer.add.php', ser, function(data){
-                //alert(data);
+            
+                if(data.indexOf('OK')!=-1){
+                    $("#td_id_"+current).addClass("badge-info");
+	            next_q();
+	            return;
+	        }
+	        alert(data);
             });
 
         }
         
         window.save_next = function save_next(){
             save();
-            $("#td_id_"+current).addClass("badge-info");
-            next_q();
+            //$("#td_id_"+current).addClass("badge-info");
+            //next_q();
         }
         
         window.mark = function mark(){
@@ -140,8 +200,32 @@ $EXAM = $ret[0];
         }
         
         window.reset = function reset(){
-            $("#td_id_"+current).removeClass("badge-success");
-            $("#td_id_"+current).removeClass("badge-info");
+            currentRec = QS[current];
+            qid = currentRec.id;
+            eid = <?php echo $eid;?>;
+            att_id=<?php echo $att_id; ?>;
+            ser = $("#q_form_id").serialize()+ "&eid="+eid+"&qid="+qid+"&att_id="+att_id+"&reset=1";
+            $.post('core/answer.add.php', ser, function(data){
+                if(data.indexOf('OK')!=-1){
+                    $("#td_id_"+current).removeClass("badge-success");
+                    $("#td_id_"+current).removeClass("badge-info");
+	            return;
+	        }
+	        alert(data);
+            });
+        }
+        
+        window.submit_exam = function submit_exam(){
+            eid = <?php echo $eid;?>;
+            att_id=<?php echo $att_id; ?>;
+            $.post('core/exam.submit.php', {eid: eid, att_id: att_id}, function(data){
+                if(data.indexOf('OK')!=-1){
+                    alert("Exam submitted successfully!");
+                    window.location = "home.php";
+	            return;
+	        }
+	        alert(data);
+            });
         }
     });
 
@@ -284,7 +368,12 @@ END;
                                     Answered
                                 </td>
                             </tr>
-                        </table>
+                        </table> <br>
+                        
+                        <div width=100% align="center">
+                        <button onclick="submit_exam()" class="btn btn-primary"> Submit the Exam </button>
+                        </div>
+                        
                     </div>
                     </div>
                 </div>

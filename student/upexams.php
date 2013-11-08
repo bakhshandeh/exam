@@ -32,6 +32,7 @@ $exams = $db->dbSelect("exams",  "end_date >= now()  and id in (select eid from 
           
           
           <?php
+            
             foreach($exams as $ex){
                 print <<<END
                 <div class="row">
@@ -45,10 +46,12 @@ $exams = $db->dbSelect("exams",  "end_date >= now()  and id in (select eid from 
                         Negative Marks: <span style="font-weight:bold;">{$ex["neg_mark"]}</span>
                         <br />
 END;
-                    
-                    
-                    if  (strtotime($ex["start_date"]) < strtotime(date("Y-m-d H:i:s"))) {
-                        print '<a class="btn btn-primary" type="button" href="tryexam.php?eid={$ex["id"]}">Attempt Now</a>';
+                    //var_dump($ex["id"]);
+                    //var_dump($_SESSION["loginInfo"]["id"]);
+                    //exit(0);
+                    $a=get_current_attempt($ex["id"], $_SESSION["loginInfo"]["id"]);
+                    if  ((strtotime($ex["start_date"]) < strtotime(date("Y-m-d H:i:s"))) and $a!=-1) {
+                        print "<a class='btn btn-primary' type='button' href='tryexam.php?eid={$ex['id']}'>Attempt Now</a>";
                     }
                     print <<<END
                     </p>
@@ -57,6 +60,8 @@ END;
 END;
                     
             }
+            
+            
           ?>
           
           </div>
