@@ -233,6 +233,10 @@ $start_date=$ret[0]["start_date"];
             });
         }
     });
+    
+    
+
+
 
     </script>
     
@@ -261,8 +265,8 @@ $start_date=$ret[0]["start_date"];
                                     $title = $sbj["title"];
                                     $class = $id == $sub_id ? "active" : "";
                                     print "
-                                    <li class='{$class}'>
-                                        <a href='tryexam.php?eid={$eid}&sub_id={$id}'>{$title}</a>
+                                     <li class='{$class}' >
+                                        <a  href='tryexam.php?eid={$eid}&sub_id={$id}'>{$title} </a>
                                     </li>";
                                 }
                             ?>

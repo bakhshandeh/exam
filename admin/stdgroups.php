@@ -34,6 +34,7 @@
 			
 			function submit_form(fid, url){
 			    $.post(url, $('#'+fid).serialize(), function(data){
+			        data=data.trim();
 			        if(data == "" || data.indexOf("OK!") != -1){
 			            document.location = "stdgroups.php";
 			        }else{

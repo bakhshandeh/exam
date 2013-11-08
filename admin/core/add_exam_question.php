@@ -24,5 +24,6 @@ $db->dbInsert("exam_qs", array(
     "qid" => $q,
     "eid" => $exam
 ));
+print "OK!";
 
 ?>

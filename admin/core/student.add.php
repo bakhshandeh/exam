@@ -89,5 +89,6 @@ foreach($stdgroups as $g){
     ));
 }
 
+print "OK!";
 
 ?>

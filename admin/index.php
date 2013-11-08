@@ -27,6 +27,7 @@ if(isLoggedIn()){
     jQuery(document).ready(function(){
         jQuery('.form-signin').submit(function(){
             $.post('core/login.php', $('.form-signin').serialize(), function(data){
+                data=data.trim();
         	if(data.indexOf("OK") != -1){
         	    window.location.href = "home.php";
         	}else{

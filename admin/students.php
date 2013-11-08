@@ -57,6 +57,7 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
 			
 			function submit_form(fid, url){
 			    $.post(url, $('#form').serialize(), function(data){
+			        data=data.trim();
 			        //alert(data);
 			        if(data.indexOf("OK!") != -1 || data == ""){
 			            document.location = "students.php";

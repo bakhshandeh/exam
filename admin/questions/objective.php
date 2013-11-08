@@ -56,7 +56,7 @@
 			    tinymce.triggerSave();
 			    url = "core/question.add.php";
 			    $.post(url, $('#'+id).serialize(), function(data){
-			        ////alert(data);
+			        data=data.trim();
 			        if(data.indexOf("OK!") != -1 || data == ""){
 			            document.location = "questions.php?type=1";
 			            return;

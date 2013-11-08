@@ -13,6 +13,7 @@ $query = "update stdgroups set title={$title} where id={$id}";
 if (!$db->query($query) ) {
     //$data["success"] = false;
 }
+print "OK!";
 
 
 ?>

@@ -125,4 +125,5 @@ if($type == 1 or $type==2){
         }
     }
 }
+print "OK!";
 ?>

@@ -14,5 +14,5 @@ if (!$db->query($query) ) {
     //$data["success"] = false;
 }
 
-
+print "OK!";
 ?>

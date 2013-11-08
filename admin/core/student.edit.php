@@ -82,5 +82,5 @@ foreach($stdgroups as $g){
         "g_id" => (int)$g
     ));
 }
-
+print "OK!";
 ?>
