@@ -16,6 +16,19 @@ foreach($keys as $k){
     $data[$k] = quote($_REQUEST[$k]);
 }
 
+if(strlen($_REQUEST["phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["phone"]) ){
+    print "Invalid phone. Phone should be 10 digit number";
+    exit(0);
+}
+
+
+if(!is_numeric($_REQUEST["enrol_number"]) ){
+    print "Invaild Enrollment Number!";
+    exit(0);
+
+}
+
+
 $db->dbUpdate("students", $data, "id=".(int)$_REQUEST["id"]);
 print "Profile updated successfully!";
 ?>

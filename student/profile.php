@@ -32,6 +32,10 @@ $ST = $_SESSION["loginInfo"];
     
     function editProfile(){
 	$.post("core/profile.edit.php", $('#edit_form').serialize(), function(data){
+	        if (data.indexOf("Profile updated successfully!")!= -1){
+	            document.location="profile.php";
+	            return;
+	        }
 		alert(data);
 	});
 	//$('#myModal').modal('hide');
