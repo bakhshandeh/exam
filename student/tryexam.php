@@ -16,15 +16,17 @@ $exam=$db->dbSelect("exams", "id={$eid}");
 if(count($res)==0 && $re > 0){
 
     $duration=explode(":",$exam[0]["duration"]);
-    $date = new DateTime();
-    $date->modify("+{$duration[0]} hours");
-    $date->modify("+{$duration[1]} minutes");
+    //$date = new DateTime();
+    //$date->modify("+{$duration[0]} hours");
+    //$date->modify("+{$duration[1]} minutes");
+    $secs = $duration[0]*3600+$duration[1]*60;
+    $date = date("Y-m-d H:i:s", time() + $secs);
     
     $db->dbInsert("exam_attempts", array(
             "eid" => $eid,
             "std_id" => $std_id,
             "start_date"=>"now()",
-            "end_date"=>quote($date->format('Y-m-d H:i:s')),
+            "end_date"=>quote($date),
             "attempt_num" => (int) $re
     ));
     
