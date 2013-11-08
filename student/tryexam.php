@@ -11,6 +11,7 @@ update_exams();
 $re=(int)get_current_attempt($eid, $std_id);
 $res=$db->dbSelect("exam_attempts", "eid={$eid} and std_id={$std_id} and attempt_num={$re}");
 $att_id=$res[0]["id"];
+$end_date = $res[0]["end_date"];
 $exam=$db->dbSelect("exams", "id={$eid}");
 
 if(count($res)==0 && $re > 0){
@@ -21,7 +22,7 @@ if(count($res)==0 && $re > 0){
     //$date->modify("+{$duration[1]} minutes");
     $secs = $duration[0]*3600+$duration[1]*60;
     $date = date("Y-m-d H:i:s", time() + $secs);
-    
+    $end_date = $date;
     $db->dbInsert("exam_attempts", array(
             "eid" => $eid,
             "std_id" => $std_id,
@@ -91,18 +92,20 @@ $start_date=$ret[0]["start_date"];
 	QS = 0;
 	current = 0;
 	
-	startDate = "<?php echo $start_date ?>";
+	startDate = "<?php echo $end_date ?>";
 	startDate = startDate.replace(/:| /g,"-");
 	var YMDhms = startDate.split("-");
         var sqlDate = new Date();
         
         duration = "<?php echo $EXAM['duration']?>";
-        dus = duration.split(':');
+        //dus = duration.split(':');
+        dus = [0,0,0,0];
         sqlDate.setFullYear(parseInt(YMDhms[0]), parseInt(YMDhms[1])-1,
                                                  parseInt(YMDhms[2]));
         sqlDate.setHours(parseInt(YMDhms[3])+parseInt(dus[0]), parseInt(YMDhms[4])+parseInt(dus[1]), 
                                               parseInt(YMDhms[5])+parseInt(dus[2]), 0/*msValue*/);
-        $('#defaultCountdown').countdown({until: sqlDate, format: 'HMS'});
+        //alert(sqlDate);
+        $('#defaultCountdown').countdown({until: sqlDate, format: 'HMS', timezone: +330});
 	
 	window.load = function load(id){
 	    exam = <?php echo $eid;?>;

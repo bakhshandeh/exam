@@ -50,7 +50,11 @@ END;
                     //var_dump($_SESSION["loginInfo"]["id"]);
                     //exit(0);
                     $a=get_current_attempt($ex["id"], $_SESSION["loginInfo"]["id"]);
-                    if  ((strtotime($ex["start_date"]) < strtotime(date("Y-m-d H:i:s"))) and $a!=-1) {
+                    //var_dump($ex["start_date"]);
+                    $d2 = date("Y-m-d H:i:s", time());
+                    //var_dump($d2);
+                    //var_dump($a);
+                    if  (($ex["start_date"] < $d2."") and $a!=-1) {
                         print "<a class='btn btn-primary' type='button' href='tryexam.php?eid={$ex['id']}'>Attempt Now</a>";
                     }
                     print <<<END
