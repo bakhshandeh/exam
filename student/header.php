@@ -24,7 +24,17 @@ checkLogin();
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
     
     <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+
+    
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+    
+    <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.jeditable.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.editable.js"></script>
+    
     <script type="text/javascript" src="js/jquery.countdown.js"></script>
 
   </head>

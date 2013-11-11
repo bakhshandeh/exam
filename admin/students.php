@@ -4,7 +4,6 @@
                         var selectedId = 0;
                         
 			$(document).ready(function() {
-			
 			         $('.multiselect').multiselect({
 buttonClass: 'btn',
 buttonWidth: 'auto',
@@ -27,7 +26,6 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
 }
 });
 			        //$('#subjects_li').addClass('active');
-				
 				$('#example').dataTable({
 				    "sAjaxSource": "core/students.load.php",
                                     "bProcessing": true,
@@ -43,16 +41,10 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
                                         }
                                     ]
                                 });
-				
-				
                                 $('#example_length label').css("width", "200px");
                                 $('#example_length select').addClass('form-control');
 
-
-                                $('#example_filter input').addClass('form-control');
                                 $('#example_filter input').css("width", "200px");
-                                
-                                
 			});
 			
 			function submit_form(fid, url){
