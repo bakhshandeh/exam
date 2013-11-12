@@ -19,5 +19,7 @@ $db->dbUpdate("exam_attempts", array(
     "is_submitted" => 1
 ), "id={$att_id}");
 
+exam_correction_by_id($att_id);
+
 print "OK";
 ?>
