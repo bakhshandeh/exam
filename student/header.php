@@ -44,7 +44,7 @@ checkLogin();
     
     
     
-        <script class="include" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+     <script class="include" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
     <script type="text/javascript" src="js/shCore.min.js"></script>
     <script type="text/javascript" src="js/shBrushJScript.min.js"></script>
     <script type="text/javascript" src="js/shBrushXml.min.js"></script>

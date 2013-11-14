@@ -14,6 +14,14 @@ checkLogin();
 
     <title>Exam Application</title>
 
+
+    <link class="include" rel="stylesheet" type="text/css" href="../student/css/jquery.jqplot.min.css" />
+    <link rel="stylesheet" type="text/css" href="../student/css/examples.min.css" />
+    <link type="text/css" rel="stylesheet" href="../student/css/shCoreDefault.min.css" />
+    <link type="text/css" rel="stylesheet" href="../student/css/shThemejqPlot.min.css" />
+    
+
+
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     
@@ -27,6 +35,22 @@ checkLogin();
 
     
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+    
+    
+     <script class="include" type="text/javascript" src="../student/js/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="../student/js/shCore.min.js"></script>
+    <script type="text/javascript" src="../student/js/shBrushJScript.min.js"></script>
+    <script type="text/javascript" src="../student/js/shBrushXml.min.js"></script>
+<!-- End Don't touch this! -->
+
+<!-- Additional plugins go here -->
+
+    <script class="include" language="javascript" type="text/javascript" src="../student/js/jqplot.barRenderer.min.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="../student/js/jqplot.categoryAxisRenderer.min.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="../student/js/jqplot.pointLabels.min.js"></script>
+
+    
+    
     
     <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.jeditable.js"></script>

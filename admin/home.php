@@ -59,6 +59,14 @@
                             </center>
                     </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>User Details</h4>
+                        
+                        <?php include("home_users.php");?>
+                    </div>
+                    </div>
           </div>
         </div>
     
