@@ -96,14 +96,23 @@
 			        if(json.details == 1){
 			            $("#edit_details").prop("checked", true);
 			        }
+			        d = new Date();
+			        d.setFullYear(2012,1,10);
+			        d.setHours(2,2,3,4);
+			        //$('#edit_start_date').datetimepicker('setValue', d);
 			        $("#edit_modal").modal();
 			    });
 			    
 			}
 			
 			function editExam(){
+			    tinymce.triggerSave();
 			    $.post("core/exam.add.php", $('#edit_subform').serialize(), function(data){
-			        document.location = "exams.php";
+			        if($.isNumeric(data) || data.trim() == ""){
+			            document.location = "exams.php";
+			            return;
+			        }
+			        alert(data);
 			    });
 			    $('#myModal').modal('hide');
 			}

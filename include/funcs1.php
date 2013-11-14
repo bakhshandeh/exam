@@ -40,12 +40,15 @@ function exam_correction_by_id($att_id){
     exam_correction(0,0,0, $att_id);
 }
 
-function exam_correction($eid, $st_id, $att_no, $att_id=-1){
+function exam_correction($eid, $std_id, $att_no, $att_id=-1){
     
     $db = DBSingleton::getInstance();
-    $ret= $db->dbSelect("exam_attempts", $att_id != -1 ? "eid={$eid} and std_id={$std_id} and attempt_num={$att_no}" : "id={$att_id}");
+    $ret= $db->dbSelect("exam_attempts", $att_id == -1 ? "eid={$eid} and std_id={$std_id} and attempt_num={$att_no}" : "id={$att_id}");
+    $ret = $ret[0];
+    //var_dump($att_id == -1 ? "eid={$eid} and std_id={$std_id} and attempt_num={$att_no}" : "id={$att_id}");exit(0);
+    $exam_id = $ret["eid"];
     
-    $exam = $db->dbSelect("exam", "id={$ret['eid']}");
+    $exam = $db->dbSelect("exams", "id={$exam_id}");
     
     $rets= $db->dbSelect("attempt_qs" , "attempt_id={$ret['id']}");
     $score=0;
@@ -62,7 +65,8 @@ function exam_correction($eid, $st_id, $att_no, $att_id=-1){
         }
     }
     $passP = $exam["pass_p"];
-    $marks = $db->dbSelect("questions", "id in (select qid from exam_qs where eid={$exam['id']})", "", 0, -1, array("sum(mark) as mark"));
+    //print "id in (select qid from exam_qs where eid={$exam_id})";exit(0);
+    $marks = $db->dbSelect("questions", "id in (select qid from exam_qs where eid={$exam_id})", "", 0, -1, array("sum(mark) as mark"));
     $totalMarks = $marks[0]["mark"];
     $p = ($score/$totalMarks);
     

@@ -28,7 +28,7 @@ if(!strlen($_REQUEST['name'])){
 }
 
 $bits = explode(':', $_REQUEST["duration"]);
-if(count($bits) != 2 || $bits[1] > 60) {
+if((count($bits) != 2 and count($bits) != 3) || $bits[1] > 60) {
     print "Invaild duration";
     exit(0);
 }
@@ -98,6 +98,7 @@ if(isset($_REQUEST["id"]) && $_REQUEST["id"]){
 }
 
 if($isEdit){
+    //var_dump($data);exit(0);
     $db->dbUpdate("exams", $data, "id=".(int)$_REQUEST["id"]);
 }else{
     $db->dbInsert("exams", $data);

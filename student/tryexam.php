@@ -121,6 +121,7 @@ $start_date=$ret[0]["start_date"];
 	
 	window.select = function select(indx){
 	    if(indx>=QS.length){
+	        alert("No more questions in this subject. Please go to another subject or submit the exam!");
 	        return;
 	    }
 	    if(QS[indx].type == 0){
