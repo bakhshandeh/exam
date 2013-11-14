@@ -14,6 +14,11 @@ checkLogin();
     <title>Exam app admin panel</title>
 
     <!-- Bootstrap core CSS -->
+    <link class="include" rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/examples.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/shCoreDefault.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/shThemejqPlot.min.css" />
+    
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/my.css" rel="stylesheet">
     
@@ -36,6 +41,26 @@ checkLogin();
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.editable.js"></script>
     
     <script type="text/javascript" src="js/jquery.countdown.js"></script>
+    
+    
+    
+        <script class="include" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="js/shCore.min.js"></script>
+    <script type="text/javascript" src="js/shBrushJScript.min.js"></script>
+    <script type="text/javascript" src="js/shBrushXml.min.js"></script>
+<!-- End Don't touch this! -->
+
+<!-- Additional plugins go here -->
+
+    <script class="include" language="javascript" type="text/javascript" src="js/jqplot.barRenderer.min.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.min.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="js/jqplot.pointLabels.min.js"></script>
+
+    
+    
+    
+    
+    
 
   </head>
 
@@ -53,6 +78,7 @@ checkLogin();
           <li><a href="upexams.php">Upcoming Exams</a></li>
           <li><a href="examhistory.php">Exam History</a></li>
           <!--li><a href="#">Group Report</a></li-->
+          <li><a href="pchart.php">Performance Chart</a></li>
            <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
