@@ -67,6 +67,14 @@
                         <?php include("home_users.php");?>
                     </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Question Bank details</h4>
+                        
+                        <?php include("home_qs.php");?>
+                    </div>
+                    </div>
           </div>
         </div>
     

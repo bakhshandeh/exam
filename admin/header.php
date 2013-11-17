@@ -46,6 +46,7 @@ checkLogin();
 <!-- Additional plugins go here -->
 
     <script class="include" language="javascript" type="text/javascript" src="../student/js/jqplot.barRenderer.min.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="../student/js/jqplot.pieRenderer.min.js"></script>
     <script class="include" language="javascript" type="text/javascript" src="../student/js/jqplot.categoryAxisRenderer.min.js"></script>
     <script class="include" language="javascript" type="text/javascript" src="../student/js/jqplot.pointLabels.min.js"></script>
 
