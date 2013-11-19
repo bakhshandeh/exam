@@ -3,7 +3,8 @@
 require_once(dirname(__FILE__)."/../include.php");
 $db = DBSingleton::getInstance();
 
-$conds = " start_date>=now() ";
+#$conds = " start_date>=now() ";
+$conds = " end_date >=now() ";
 $tody_exams= $db->dbSelect("exams", $conds);
 foreach($tody_exams as $k => $ex){
     $ret = $db->dbSelect("questions", "id in (select qid from exam_qs where eid={$ex['id']})", "", 0, -1, array("sum(mark) as mark"));

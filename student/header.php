@@ -11,7 +11,7 @@ checkLogin();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Exam app admin panel</title>
+    <title>my profile</title>
 
     <!-- Bootstrap core CSS -->
     <link class="include" rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />

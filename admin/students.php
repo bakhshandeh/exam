@@ -31,11 +31,11 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
                                     "bProcessing": true,
                                     "aoColumnDefs": [ 
                                         {
-                                            "aTargets": [10], 
+                                            "aTargets": [9], 
                                             "sType": "html", 
                                             "fnRender": function(o, val) {
-                                                //alert(o);
-                                                return "<a href=\"javascript:delRecord('students', "+ o.aData[10]+", 'students.php')\"> Delete </a> \
+                                                //alert(o.aData);
+                                                return "<a href=\"javascript:delRecord('students', "+ o.aData[9]+", 'students.php')\"> Delete </a> \
                                                 | <a href='javascript:editOnClick("+o.aData[10]+");'> Edit/View </a>";
                                             } 
                                         }
@@ -194,9 +194,9 @@ function showModal($name = "myModal" , $edit = false){
                     <div class="col-lg-4">
                         Alternate Phone: <input type="text" class="form-control" placeholder="Alternate Phone" id="{$prefix}alt_phone" name="alt_phone">
                     </div>
-                    <div class="col-lg-4">
+                    <!--div class="col-lg-4">
                         Guardian Phone: <input type="text" class="form-control" placeholder="Guardian Phone" id="{$prefix}parent_phone" name="parent_phone">
-                    </div>
+                    </div-->
                 </div>
                 </div>
                 
@@ -217,10 +217,10 @@ function showModal($name = "myModal" , $edit = false){
                 </div>
                 
                 
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="exampleInputEmail1">Comments: </label>
                     <input type="text" class="form-control" id="{$prefix}comments" placeholder="Comments" name="comments">
-                </div>
+                </div-->
                 
                 
             </form>
@@ -258,10 +258,11 @@ showModal("edit_modal", true);
 			<th>Enrolment Number</th>
 			<th>Phone</th>
 			<th>Address</th>
-			<th>Guardian Phone</th>
+			<!--th>Guardian Phone</th-->
+			<th>Student Group</th>
 			<th>Date of Admission</th>
 			<th>Status</th>
-			<th>Comments</th>
+			<!--th>Comments</th-->
 			<th>Actions</th>
 		</tr>
 	</thead>

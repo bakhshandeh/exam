@@ -16,7 +16,6 @@
                                 });
                                 
                                 $('#rec_exams_table').dataTable({
-                                
                                     "bPaginate": false,  
                                     "bInfo": false,  
                                     "bFilter": false,

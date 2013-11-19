@@ -11,7 +11,7 @@ $(document).ready(function() {
                                 });
   $.post("core/home_qs.php?chart1=1", function(data){
     var json = $.parseJSON(data);
-    alert(json.l);
+    //alert(json.l);
         $(document).ready(function(){
         plot2 = jQuery.jqplot('chart1_qs', 
             json.l, 

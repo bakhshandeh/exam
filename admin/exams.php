@@ -40,12 +40,12 @@
                                     "bProcessing": true,
                                     "aoColumnDefs": [ 
                                         {
-                                            "aTargets": [8], 
+                                            "aTargets": [7], 
                                             "sType": "html", 
                                             "fnRender": function(o, val) {
-                                                return "<a href=\"javascript:delRecord('exams', "+ o.aData[8]+", 'exams.php')\"> Delete </a> \
-                                                | <a href='javascript:editOnClick("+o.aData[8]+");'> Edit/View </a> \
-                                                | <a href='exam_details.php?id="+o.aData[8]+"'> Details </a> \
+                                                return "<a href=\"javascript:delRecord('exams', "+ o.aData[7]+", 'exams.php')\"> Delete </a> \
+                                                | <a href='javascript:editOnClick("+o.aData[7]+");'> Edit/View </a> \
+                                                | <a href='exam_details.php?id="+o.aData[7]+"'> Details </a> \
                                                 ";
                                             } 
                                         }
@@ -223,8 +223,8 @@ function showModal($name = "myModal" , $edit = false){
                 
                 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Instructions: </label>
-                    <textarea name="insts" id=="{$prefix}insts"></textarea>
+                    <!--label for="exampleInputEmail1">Instructions: </label>
+                    <textarea name="insts" id=="{$prefix}insts"></textarea-->
                     
                     <div class="checkbox">
                         <label>
@@ -277,7 +277,7 @@ showModal("edit_modal", true);
 			<th>Pass Percent %</th>
 			<th>Negative Marks</th>
 			<th>No. of attempt</th>
-			<th>Instructions</th>
+			<!--th>Instructions</th-->
 			<th>Actions</th>
 		</tr>
 	</thead>
