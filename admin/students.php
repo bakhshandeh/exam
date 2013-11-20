@@ -36,7 +36,8 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
                                             "fnRender": function(o, val) {
                                                 //alert(o.aData);
                                                 return "<a href=\"javascript:delRecord('students', "+ o.aData[9]+", 'students.php')\"> Delete </a> \
-                                                | <a href='javascript:editOnClick("+o.aData[10]+");'> Edit/View </a>";
+                                                | <a href='javascript:editOnClick("+o.aData[9]+");'> Edit/View </a> \
+                                                | <a href='std_exams.php?id="+o.aData[9]+"'> Reports </a>";
                                             } 
                                         }
                                     ]
@@ -44,6 +45,7 @@ return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
                                 $('#example_length label').css("width", "200px");
                                 $('#example_length select').addClass('form-control');
 
+                                $('#example_filter input').addClass('form-control');
                                 $('#example_filter input').css("width", "200px");
 			});
 			

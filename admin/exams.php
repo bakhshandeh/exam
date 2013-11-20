@@ -46,7 +46,7 @@
                                                 return "<a href=\"javascript:delRecord('exams', "+ o.aData[7]+", 'exams.php')\"> Delete </a> \
                                                 | <a href='javascript:editOnClick("+o.aData[7]+");'> Edit/View </a> \
                                                 | <a href='exam_details.php?id="+o.aData[7]+"'> Details </a> \
-                                                ";
+                                                | <a href='exam_report.php?id="+o.aData[7]+"'> Report </a>";
                                             } 
                                         }
                                     ]
