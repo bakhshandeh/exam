@@ -89,7 +89,8 @@
 			        $.each(json, function(k,v){
 			            $('#edit_'+k).val(v);
 			        });
-			        tinyMCE.activeEditor.setContent(json.insts);
+			        
+			        //tinyMCE.activeEditor.setContent(json.insts);
 			        if(json.declare_results == 1){
 			            $("#edit_declare_results").prop("checked", true);
 			        }
@@ -106,7 +107,7 @@
 			}
 			
 			function editExam(){
-			    tinymce.triggerSave();
+			    //tinymce.triggerSave();
 			    $.post("core/exam.add.php", $('#edit_subform').serialize(), function(data){
 			        if($.isNumeric(data) || data.trim() == ""){
 			            document.location = "exams.php";

@@ -196,9 +196,9 @@ function showModal($name = "myModal" , $edit = false){
                     <div class="col-lg-4">
                         Alternate Phone: <input type="text" class="form-control" placeholder="Alternate Phone" id="{$prefix}alt_phone" name="alt_phone">
                     </div>
-                    <!--div class="col-lg-4">
+                    <div class="col-lg-4">
                         Guardian Phone: <input type="text" class="form-control" placeholder="Guardian Phone" id="{$prefix}parent_phone" name="parent_phone">
-                    </div-->
+                    </div>
                 </div>
                 </div>
                 

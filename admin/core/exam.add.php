@@ -14,7 +14,7 @@ $keys = array(
     "neg_mark" => "float",
     "pass_p" => "float",
     "no_attempt"=>"int",
-    "insts" => "",
+    //"insts" => "",
     "declare_results" => "checkbox",
     "details" => "checkbox"
 );
@@ -60,17 +60,15 @@ if ( !is_numeric($_REQUEST["no_attempt"]) ){
     exit(0);
 }
 
+/*
 if(!strlen($_REQUEST['insts'])){
-    print "Invaild Instructions!";
+    print 'Invaild Instructions!';
     exit(0);
 
 }
-
+*/
 
 //--END--
-
-
-
 
 $data = array();
 foreach($keys as $k => $v){
