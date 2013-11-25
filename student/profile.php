@@ -55,7 +55,7 @@ $img = $ST["profile_img"] ? $ST["profile_img"] : "def.jpg";
     }
     
     function edit_enable(){
-        alert("hi");
+        //alert("hi");
         $('#edit_phone').prop('disabled', false);
         $('#edit_alt_phone').prop('disabled', false);
     }
