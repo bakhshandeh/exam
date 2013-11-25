@@ -5,10 +5,11 @@ $db = DBSingleton::getInstance();
 $id = (int)$_SESSION["loginInfo"]["id"];
 
 $keys = array(
-    "pass",
-    "address",
-    "enrol_number",
-    "phone"
+    //"pass",
+    //"address",
+    //"enrol_number",
+    "phone",
+    "alt_phone"
 );
 
 $data = array();
@@ -23,8 +24,8 @@ if(strlen($_REQUEST["phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["phone"]) ){
 
 
 if(!is_numeric($_REQUEST["enrol_number"]) ){
-    print "Invaild Enrollment Number!";
-    exit(0);
+    //print "Invaild Enrollment Number!";
+    //exit(0);
 
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-define("UPLOADS_PATH", dirname(__FILE__)."/../../../uploads/");
+define("UPLOADS_PATH", dirname(__FILE__)."/../uploads/");
 
 function quote($var){
 
