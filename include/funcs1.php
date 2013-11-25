@@ -54,13 +54,14 @@ function exam_correction($eid, $std_id, $att_no, $att_id=-1){
     $score=0;
     foreach($rets as $e){
         $r=$db->dbSelect("questions" , "id={$e['qid']}");
+        $r = $r[0];
         if($r['type']!=0){
             if ($r['answer']==$e['answer']){
                 $score+=$r['mark'];
-                $db->dbUpdate("attempt_qs", array("is_true"=>1 ) ,"attempt_id={$ret[id]} and $qid={$r[id]}");
+                $db->dbUpdate("attempt_qs", array("is_true"=>1 ) ,"attempt_id={$e['id']} and qid={$r['id']}");
             }else{
                 $score-=$r['neg_mark'];
-                $db->dbUpdate("attempt_qs", array("is_true"=>0 ), "attempt_id={$ret[id]}  and $qid={$r[id]}");
+                $db->dbUpdate("attempt_qs", array("is_true"=>0 ), "attempt_id={$e['id']}  and qid={$r['id']}");
             }
         }
     }
@@ -72,7 +73,10 @@ function exam_correction($eid, $std_id, $att_no, $att_id=-1){
     
     $pass = $p > $passP ? 1 : 0;
     
-    $db->dbUpdate("exam_attempts", array( "score" => $score, "is_passed" => $pass), "eid={$eid} and std_id={$std_id} and attempt_num={$att_no}");
+    //var_dump($score);
+    //var_dump("eid={$eid} and std_id={$std_id} and attempt_num={$att_no}");exit(0);
+    $db->dbUpdate("exam_attempts", array( "score" => $score, "is_passed" => $pass), 
+                $att_id == -1 ? "eid={$eid} and std_id={$std_id} and attempt_num={$att_no}" : "id={$att_id}");
 }
 
 

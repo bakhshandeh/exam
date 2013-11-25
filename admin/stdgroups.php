@@ -46,7 +46,18 @@
 			
 			function editOnClick(id){
 			    selectedId = id;
-			    $("#edit_modal").modal();
+			    
+			    //Load Data
+			    
+			    $.post("core/stdgroups.load.php", {id: selectedId}, function(data){
+			        //alert("edit");
+			        var json = $.parseJSON(data);
+			        $.each(json, function(k,v){
+			            $('#edit_'+k).val(v);
+			        });
+			        $("#edit_modal").modal();
+			    });
+			    //$("#edit_modal").modal();
 			}
 			
 			function editSubject(){

@@ -4,6 +4,17 @@
 include("header.php");
 $ST = $_SESSION["loginInfo"];
 
+$db = DBSingleton::getInstance();
+$rets = $db->dbSelect("exam_attempts join exams on(exams.id=eid)", "std_id={$ST['id']}");
+$scores = array();
+$names = array();
+foreach($rets as $ret){
+    $scores[] = $ret["score"];
+    $names[] = quote($ret["name"]);
+}
+
+$scoreStr = "[".implode(",", $scores)."]";
+$nameStr = "[".implode(",", $names)."]";
 ?>
 
     
@@ -14,8 +25,8 @@ $ST = $_SESSION["loginInfo"];
 
         $(document).ready(function(){
         $.jqplot.config.enablePlugins = true;
-        var s1 = [2, 6, 7];
-        var ticks = ['Biology', 'Test ', 'Test 2'];
+        var s1 = <?php echo $scoreStr;?>;
+        var ticks = <?php echo $nameStr;?>;
          
         plot1 = $.jqplot('chart1', [s1], {
             // Only animate if we're not using excanvas (not in IE 7 or IE 8)..

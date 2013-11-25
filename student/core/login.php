@@ -10,6 +10,10 @@ $p = quote($_REQUEST["pass"]);
 $ret = $db->dbSelect("students", "email = {$u} and pass={$p}");
 if(count($ret)){
     $student = $ret[0];
+    if($student["status"] != 0){
+        print "Suspended/Pending account!";
+        exit(0);
+    }
     $_SESSION["loginInfo"] = $student;
     print "OK!";
     exit(0);

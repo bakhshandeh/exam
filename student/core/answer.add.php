@@ -33,6 +33,12 @@ if (strlen($_REQUEST["answer"])==0 && !isset($_REQUEST["reset"])){
 
 }
 
+$rets = $db->dbSelect("attempt_qs", "qid={$qid} and attempt_id={$att_id}");
+if(count($rets)){
+    print "You can not edit the answered question!";
+    exit(0);
+}
+
 $db->dbDelete("attempt_qs", "qid={$qid} and attempt_id={$att_id}");
 if(!isset($_REQUEST["reset"]) ){
     $db->dbInsert("attempt_qs", $data);

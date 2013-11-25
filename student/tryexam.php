@@ -9,6 +9,10 @@ $db = DBSingleton::getInstance();
 update_exams();
 
 $re=(int)get_current_attempt($eid, $std_id);
+if($re == -1){
+    print "<br> <br> ERROR: Your maximum attempt count for this Exam is over";exit(0);
+}
+
 $res=$db->dbSelect("exam_attempts", "eid={$eid} and std_id={$std_id} and attempt_num={$re}");
 $att_id=$res[0]["id"];
 $end_date = $res[0]["end_date"];
@@ -179,7 +183,7 @@ $start_date=$ret[0]["start_date"];
         window.save = function save(){
             currentRec = QS[current];
             qid = currentRec.id;
-            eid = <?php echo $eid;?>;
+            eid = <?php echo $eid;?>;                   
             att_id=<?php echo $att_id; ?>;
             ser = $("#q_form_id").serialize()+ "&eid="+eid+"&qid="+qid+"&att_id="+att_id;
             
