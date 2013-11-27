@@ -38,12 +38,14 @@ $exam = $exam[0];
         <!-- Keep all page content within the page-content inset div! -->
         <div class="page-content inset">
           
+
                     <div class="row">
                         <div class="col-md-8">
                             <h4>Exam Name: <?php echo $exam['name'];?> <br />
                             <br><br>
                             Students:
                             </h4>
+                        <?php include("exam_report_chart.php");?>
                           <center>
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="up_exams_table" style="width:800px" >
 	                        <thead>

@@ -74,6 +74,12 @@
         </div>
         <!-- Keep all page content within the page-content inset div! -->
         <div class="page-content inset">
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <?php include("home_per_chart.php"); ?>
+                        </div>
+                    </div>
           
                     <div class="row">
                         <div class="col-md-8">
@@ -126,6 +132,7 @@
 			            <th>Duration</th>
 			            <th>Percentage</th>
 			            <th>Rank</th>
+			            <th>Results</th>
 			
 		                    </tr>
 	                        </thead>

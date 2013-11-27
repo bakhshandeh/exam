@@ -40,6 +40,7 @@
 			            <th>Duration</th>
 			            <th>Percentage</th>
 			            <th>Rank</th>
+			            <th>Actions</th>
 			
 		                    </tr>
 	                        </thead>

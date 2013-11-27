@@ -15,7 +15,8 @@
                                             "sType": "html", 
                                             "fnRender": function(o, val) {
                                                 return "<a href=\"javascript:delRecord('stdgroups', "+ o.aData[2]+", 'stdgroups.php')\"> Delete </a> \
-                                                | <a href='javascript:editOnClick("+o.aData[2]+");'> Edit </a>";
+                                                | <a href='javascript:editOnClick("+o.aData[2]+");'> Edit </a> \
+                                                | <a href=''> Report </a>";
                                             } 
                                         }
                                     ]

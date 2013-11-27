@@ -14,8 +14,11 @@ foreach($rets as &$ret){
         $ret["percentage"] = (float)($score*100.00/$total);
         
         $ret["state"] = $ret["is_passed"] == 1 ? "Passed" : "Failed";
+        
+        $id = $ret["id"];
+        $ret["link"] = "<a href='correxam.php?att_id={$ret['id']}'>Rsults</a>";
 }
-$cols = array("name", "start_date", "state", "score", "duration", "percentage", "rank");
+$cols = array("name", "start_date", "state", "score", "duration", "percentage", "rank", "link");
 $tody_exams = arraySelectKeys($rets, $cols);
     
 header('Content-Type: application/json');

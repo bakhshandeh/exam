@@ -23,7 +23,7 @@ $rets = $db->dbSelect("questions left join subjects on(subject=subjects.id)", $c
 foreach($rets as &$q){
     $ans = $db->dbSelect("qanswers", "qid=".($q["id"]) );
     foreach($ans as &$an){
-        unset($an["is_true"]);
+        //unset($an["is_true"]);
     }
     $q["answers"] = $ans;
 }
