@@ -22,6 +22,11 @@ if(strlen($_REQUEST["phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["phone"]) ){
     exit(0);
 }
 
+if(strlen($_REQUEST["alt_phone"])!=10 or !ereg('^[0-9]+$',$_REQUEST["alt_phone"]) ){
+    print "Invalid phone. Phone should be 10 digit number";
+    exit(0);
+}
+
 
 if(!is_numeric($_REQUEST["enrol_number"]) ){
     //print "Invaild Enrollment Number!";

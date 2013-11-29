@@ -17,7 +17,7 @@ if(isset($_REQUEST["id"])){
 
 
 $cond = "";
-if($_REQUEST["type"]){
+if(strlen($_REQUEST["type"])){
     $cond = "type=".(int)$_REQUEST["type"];
 }
 if($_REQUEST["exam"]){

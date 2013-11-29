@@ -46,8 +46,8 @@ $img = $ST["profile_img"] ? $ST["profile_img"] : "def.jpg";
     function editProfile(){
 	$.post("core/profile.edit.php", $('#edit_form').serialize(), function(data){
 	        if (data.indexOf("Profile updated successfully!")!= -1){
-	            document.location="profile.php";
-	            return;
+	            //document.location="profile.php";
+	            //return;
 	        }
 		alert(data);
 	});
@@ -79,7 +79,7 @@ $img = $ST["profile_img"] ? $ST["profile_img"] : "def.jpg";
                 <img src="../uploads/<?php echo $img;?>" style="width:170ox;height: 150px;"></img>
                 <br> <br><br>
                 
-                <form id="edit_form" role="form" class="" method="post" enctype="multipart/form-data" action="core/profile_img.php">
+                <form id="edit_form2" role="form" class="" method="post" enctype="multipart/form-data" action="core/profile_img.php">
                     <input type="file" name="file" size="10">
                     <br>
                     <button type="submit" class="btn btn-primary" type="button">Update picture</button>

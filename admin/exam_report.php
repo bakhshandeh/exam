@@ -55,6 +55,7 @@ $exam = $exam[0];
 			            <th>Total Qs. Attempted</th>
 			            <th>Duration</th>
 			            <th>Percentage</th>
+			            <th>Rank</th>
 		                    </tr>
 	                        </thead>
                             </table>

@@ -10,7 +10,12 @@ update_exams();
 
 $re=(int)get_current_attempt($eid, $std_id);
 if($re == -1){
-    print "<br> <br> ERROR: Your maximum attempt count for this Exam is over";exit(0);
+    print <<<END
+    <script>
+        alert("ERROR: Your maximum attempt count for this Exam is over");
+        window.location = "home.php";
+    </script>
+END;
 }
 
 $res=$db->dbSelect("exam_attempts", "eid={$eid} and std_id={$std_id} and attempt_num={$re}");
@@ -139,17 +144,17 @@ $start_date=$ret[0]["start_date"];
 	        html = "";
 	        for(i=0; i < QS[indx].answers.length; i++){
 	            s = "";
-	            if(QS[indx].std_answer.answer == i){
+	            if(QS[indx].std_answer.answer == i+1){
 	                s = "checked";
 	            }
-	            html = html + "<input type='radio' name='answer' "+s+" value="+i+"> "+QS[indx]['answers'][i].body+"<br>";
+	            html = html + "<input type='radio' name='answer' "+s+" value="+(i+1)+"> "+QS[indx]['answers'][i].body+"<br>";
 	        }
 	    }
 	    
 	    if(QS[indx].type == 2){
 	        html = "";
 	        for(i=0; i < QS[indx].answers.length; i++){
-	            html = html + "<input type='checkbox' value="+i+" name='answer["+i+"]'> "+QS[indx]['answers'][i].body+"<br>";
+	            html = html + "<input type='checkbox' value="+(i+1)+" name='answer["+i+"]'> "+QS[indx]['answers'][i].body+"<br>";
 	        }
 	    }
 	    

@@ -24,9 +24,12 @@ $(document).ready(function() {
         shadow: false, 
         renderer: jQuery.jqplot.PieRenderer, 
         rendererOptions: { 
-          startAngle: 180, 
-          sliceMargin: 4, 
-          showDataLabels: true } 
+          //startAngle: 180, 
+          //sliceMargin: 4, 
+          showDataLabels: true ,
+          dataLabels: 'value',
+          dataLabelFormatString:'%d'
+          } 
       }, 
       legend: { show:true, location: 'w' }
     }

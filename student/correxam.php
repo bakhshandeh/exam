@@ -118,10 +118,18 @@ $EXAM = $ret[0];
 	        html = "";
 	        for(i=0; i < QS[indx].answers.length; i++){
 	            s = "";
-	            if(QS[indx].std_answer.answer == i){
+	            if(QS[indx].std_answer.answer == i+1){
 	                s = "checked";
 	            }
-	            html = html + "<input type='radio' name='answer' "+s+" value="+i+" disabled> "+QS[indx]['answers'][i].body+"<br>";
+	            color = '';
+	            if(QS[indx]['answers'][i]['is_true'] == 1 && QS[indx].std_answer.answer == i+1){
+	                color = 'green';
+	            }
+	            
+	            if(QS[indx]['answers'][i]['is_true'] == 1 && QS[indx].std_answer.answer != i+1){
+	                color = 'red';
+	            }
+	            html = html + "<input type='radio' name='answer' "+s+" value="+i+" disabled> <font color='"+color+"'>"+QS[indx]['answers'][i].body+"</font><br>";
 	        }
 	    }
 	    
@@ -141,11 +149,27 @@ $EXAM = $ret[0];
 	        if(QS[indx].std_answer.answer == 1){
 	            true_s = "checked";
 	        }
-	        html = "<input type='radio' name='answer' value=1 "+true_s+" disabled> True <br>" + "<input type='radio' name='answer' value=0 "+false_s+" disabled> False";
+	        color_t = '';
+	        color_f = '';
+	        if(QS[indx].std_answer.answer == 1 && QS[indx].answer == 1){
+	                color_t = 'green';
+	        }
+	        if(QS[indx].std_answer.answer == 0 && QS[indx].answer == 1){
+	                color_t = 'red';
+	        }
+	        if(QS[indx].std_answer.answer == 0 && QS[indx].answer == 0){
+	                color_f = 'green';
+	        }
+	        
+	        if(QS[indx].std_answer.answer == 1 && QS[indx].answer == 0){
+	                color_f = 'red';
+	        }
+	        html = "<input type='radio' name='answer' value=1 "+true_s+" disabled><font color="+color_t+"> True </font><br>\
+	        " + "<input type='radio' name='answer' value=0 "+false_s+" disabled><font color="+color_f+"> False</font>";
 	    }
 	    
 	    $('#q_form_id').html(html);
-	    $('#q_body_id').html("<b>Question #"+(indx+1)+"</b><br>"+QS[indx].body);
+	    $('#q_body_id').html("<b>Question #"+(indx+1)+" / "+QS[indx]['diff_level']+" / Mark: "+ QS[indx]['mark'] +" / Negative Mark: "+QS[indx]['neg_mark']+"</b><br>"+QS[indx].body);
 	};
 	
 	load();
@@ -318,8 +342,12 @@ $EXAM = $ret[0];
                                 }
                                 $goto = $num - 1;
                                 $state = "";
-                                if($QS[$goto]["is_answered"]){
-                                    $state = " badge-info";
+
+                                //var_dump($QS[$goto]);
+                                if($QS[$goto]["is_answered"] && $QS[$goto]["answer"] == $QS[$goto]['std_answer']["answer"]){
+                                    $state = " badge-success";
+                                }else if($QS[$goto]["is_answered"]){
+                                    $state = " badge-danger";
                                 }
                                 print <<<END
                                 <td class="badge{$state}" style="width:40px;height:30px;line-height:20px;" onclick="goto({$goto})" id="td_id_{$goto}"> 
