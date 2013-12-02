@@ -56,6 +56,8 @@ $exam = $exam[0];
 			            <th>Duration</th>
 			            <th>Percentage</th>
 			            <th>Rank</th>
+			            <th>Details</th>
+			            
 		                    </tr>
 	                        </thead>
                             </table>

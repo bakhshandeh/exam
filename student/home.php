@@ -1,8 +1,5 @@
 <?php include("header.php"); ?>
 
-
-
-
 <script type="text/javascript" charset="utf-8">    
     /*
     jQuery(document).ready(function(){
@@ -142,16 +139,5 @@
                     </div>
           </div>
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 
 <?php include("footer.php");?>

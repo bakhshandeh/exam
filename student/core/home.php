@@ -11,7 +11,8 @@ if($_REQUEST["up"] == 1){
 if($_REQUEST["pass"] == 1){
     //$conds = "id in (select eid from exam_attempts where std_id={$std_id} and is_passed=1)";
     $rets = $db->dbSelect("exam_attempts join exams on (eid=exams.id)", "std_id={$std_id} and is_passed=1", "", 0, -1, array("*", "exam_attempts.id as att_id",
-        "(select count(distinct score) from exam_attempts t where t.eid=exam_attempts.eid and t.score > exam_attempts.score and score is not null)+1 as rank"
+        "(select count(distinct score) from exam_attempts t where t.eid=exam_attempts.eid and t.score > exam_attempts.score and score is not null)+1 as rank",
+        "timediff(exam_attempts.end_date, exam_attempts.start_date) as std_dur"
     ));
     
     foreach($rets as &$ret){
@@ -25,7 +26,7 @@ if($_REQUEST["pass"] == 1){
         $id = $ret["att_id"];
         $ret["link"] = "<a href='correxam.php?att_id={$ret['att_id']}'>Rsults</a>";
     }
-    $cols = array("name", "start_date", "score", "duration", "percentage", "rank", "link");
+    $cols = array("name", "start_date", "score", "std_dur", "percentage", "rank", "link");
     $tody_exams = arraySelectKeys($rets, $cols);
     
     header('Content-Type: application/json');

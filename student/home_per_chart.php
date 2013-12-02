@@ -1,3 +1,17 @@
+<?php
+
+$id = $_SESSION["loginInfo"]["id"];
+$db =  DBSingleton::getInstance();
+
+$ret = $db->dbSelect("exam_attempts", "is_passed=1", "", 0, -1, array("count(1) as count"));
+$passed = (int)$ret[0]["count"];
+
+$ret = $db->dbSelect("exam_attempts", "is_passed=0", "", 0, -1, array("count(1) as count"));
+$failed = (int)$ret[0]["count"];
+
+$l = "[[['Passed', $passed], ['Failed', $failed]]]";
+?>                                                          
+
 <script>
 $(document).ready(function() {
     $('#qs_table').dataTable({
@@ -10,7 +24,7 @@ $(document).ready(function() {
                                     "bProcessing": true,
                                 });
     
-    l = [[["Passed", 1], ["Failed", 1]]];
+    l = <?php echo $l;?>;
     plot2 = jQuery.jqplot('chart1_qs', 
             //json.l, 
             l,

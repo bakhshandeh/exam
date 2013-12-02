@@ -75,7 +75,7 @@ function exam_correction($eid, $std_id, $att_no, $att_id=-1){
     
     //var_dump($score);
     //var_dump("eid={$eid} and std_id={$std_id} and attempt_num={$att_no}");exit(0);
-    $db->dbUpdate("exam_attempts", array( "score" => $score, "is_passed" => $pass), 
+    $db->dbUpdate("exam_attempts", array( "score" => $score, "is_passed" => $pass, "end_date" => "now()"), 
                 $att_id == -1 ? "eid={$eid} and std_id={$std_id} and attempt_num={$att_no}" : "id={$att_id}");
 }
 

@@ -53,6 +53,7 @@ $student = $student[0];
 			            <th>Marks Obtained</th>
 			            <th>Total Qs. Attempted</th>
 			            <th>Duration</th>
+			            <th>Details</th>
 		                    </tr>
 	                        </thead>
                             </table>
